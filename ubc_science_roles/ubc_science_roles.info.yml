@@ -1,0 +1,13 @@
+name: UBC Science Roles
+type: module
+description: This module manages user roles for Science suite of sites.
+package: UBC Web Services
+dependencies:
+  - ubc_science_announcement_extend:ubc_science_announcement_extend
+  - ubc_science_event_extend:ubc_science_event_extend
+  - ubc_science_homepage_extend:ubc_science_homepage_extend
+  - ubc_science_landing_page_extend:ubc_science_landing_page_extend
+  - ubc_science_profile_extend:ubc_science_profile_extend
+  - ubc_science_shared_config:ubc_science_shared_config
+core: '8.x'
+core_version_requirement: ^8 || ^9

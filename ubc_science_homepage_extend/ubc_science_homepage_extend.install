@@ -1,0 +1,228 @@
+<?php
+
+/**
+ * Implements hook_install().
+ *
+ * @ingroup ubc_science_homepage_extend
+ */
+function ubc_science_homepage_extend_install() {
+  $config = \Drupal::service('config.factory');
+
+  // add additional paragraph types to field
+  $config->getEditable('field.field.node.homepage.field_homepage_custom_content')
+    ->set('dependencies.config', [
+      'field.storage.node.field_homepage_custom_content',
+      'node.type.homepage',
+      'paragraphs.paragraphs_type.card_group',
+      'paragraphs.paragraphs_type.slideshow',
+      'paragraphs.paragraphs_type.tabcordion',
+      'paragraphs.paragraphs_type.text',
+      'paragraphs.paragraphs_type.text_links_image_region',
+      'paragraphs.paragraphs_type.text_links_region',
+    ])
+    ->set('settings.handler_settings.target_bundles', [
+      'card_group' => 'card_group',
+      'feature_image' => 'feature_image',
+      'slideshow' => 'slideshow',
+      'tabcordion' => 'tabcordion',
+      'text' => 'text',
+      'text_links_region' => 'text_links_region',
+      'text_links_image_region' => 'text_links_image_region',
+    ])
+    ->set('settings.handler_settings.target_bundles_drag_drop', [
+      'card_group' => [
+        'weight' => '15',
+        'enabled' => true,
+      ],
+      'card_horizontal' => [
+        'weight' => '16',
+        'enabled' => false,
+      ],
+      'card_vertical' => [
+        'weight' => '17',
+        'enabled' => false,
+      ],
+      'feature_image' => [
+        'weight' => '18',
+        'enabled' => true,
+      ],
+      'icon_card' => [
+        'weight' => '19',
+        'enabled' => false,
+      ],
+      'image_card' => [
+        'weight' => '20',
+        'enabled' => false,
+      ],
+      'masthead' => [
+        'weight' => '22',
+        'enabled' => false,
+      ],
+      'masthead_simple' => [
+        'weight' => '23',
+        'enabled' => false,
+      ],
+      'slide' => [
+        'weight' => '22',
+        'enabled' => false,
+      ],
+      'slideshow' => [
+        'weight' => '23',
+        'enabled' => true,
+      ],
+      'tab' => [
+        'weight' => '24',
+        'enabled' => false,
+      ],
+      'tabcordion' => [
+        'weight' => '25',
+        'enabled' => true,
+      ],
+      'text' => [
+        'weight' => '26',
+        'enabled' => true,
+      ],
+      'text_links_image_region' => [
+        'weight' => '29',
+        'enabled' => true,
+      ],
+      'text_links_region' => [
+        'weight' => '30',
+        'enabled' => true,
+      ],
+    ])
+    ->save();
+  // adjust the form display
+  $config->getEditable('core.entity_form_display.node.homepage.default')
+    ->clear('hidden.field_homepage_masthead')
+    ->clear('content.field_feature_link')
+    ->clear('content.field_feature_text')
+    ->clear('content.field_home_feature_image')
+    ->set('hidden', [
+      'field_feature_link' => true,
+      'field_feature_text' => true,
+      'field_home_feature_image' => true,
+    ])
+    ->set('dependencies.config', [
+      'field.field.node.homepage.body',
+      'field.field.node.homepage.field_feature_link',
+      'field.field.node.homepage.field_feature_text',
+      'field.field.node.homepage.field_home_feature_image',
+      'field.field.node.homepage.field_home_meta_tags',
+      'field.field.node.homepage.field_homepage_custom_content',
+      'field.field.node.homepage.field_homepage_masthead',
+      'node.type.homepage',
+    ])
+    ->set('dependencies.module', [
+      'allowed_formats',
+      'field_group',
+      'maxlength',
+      'metatag',
+      'paragraphs',
+      'path',
+      'text',
+    ])
+    ->set('content.field_homepage_custom_content', [
+      'weight' => '3',
+      'type' => 'paragraphs',
+      'region' => 'content',
+      'third_party_settings' => [],
+      'settings' => [
+        'title' => 'Paragraph',
+        'title_plural' => 'Paragraphs',
+        'edit_mode' => 'open',
+        'closed_mode' => 'summary',
+        'autocollapse' => 'none',
+        'closed_mode_threshold' => '0',
+        'add_mode' => 'button',
+        'form_display_mode' => 'default',
+        'default_paragraph_type' => '_none',
+        'features' => [
+          'add_above' => 'add_above',
+          'collapse_edit_all' => 'collapse_edit_all',
+          'duplicate' => 'duplicate',
+        ],
+      ],
+    ])
+    ->set('content.field_homepage_masthead', [
+      'weight' => '1',
+      'type' => 'paragraphs',
+      'region' => 'content',
+      'third_party_settings' => [],
+      'settings' => [
+        'title' => 'Masthead',
+        'title_plural' => 'Masthead s',
+        'edit_mode' => 'open',
+        'closed_mode' => 'summary',
+        'autocollapse' => 'none',
+        'closed_mode_threshold' => '0',
+        'add_mode' => 'button',
+        'form_display_mode' => 'default',
+        'default_paragraph_type' => '_none',
+        'features' => [
+          'add_above' => '0',
+          'collapse_edit_all' => 'collapse_edit_all',
+          'duplicate' => 'duplicate',
+        ],
+      ],
+    ])
+    ->set('content.title.weight', '-10')
+    ->save();
+  // update the shown fields on the default display
+  $config->getEditable('core.entity_view_display.node.homepage.default')
+    ->set('hidden', [
+      'field_homepage_masthead' => true,
+    ])
+    ->save();
+  // update the shown fields on the featured_content display
+  $config->getEditable('core.entity_view_display.node.homepage.featured_content')
+    ->clear('content.field_home_feature_image')
+    ->clear('content.field_feature_link')
+    ->clear('content.field_feature_text')
+    ->set('hidden', [
+      'field_home_feature_image' => true,
+      'field_feature_link' => true,
+      'field_feature_text' => true,
+    ])
+    ->set('dependencies.config', [
+      'core.entity_view_mode.node.featured_content',
+      'field.field.node.homepage.body',
+      'field.field.node.homepage.field_feature_link',
+      'field.field.node.homepage.field_feature_text',
+      'field.field.node.homepage.field_home_feature_image',
+      'field.field.node.homepage.field_home_meta_tags',
+      'field.field.node.homepage.field_homepage_custom_content',
+      'field.field.node.homepage.field_homepage_masthead',
+      'node.type.homepage',
+    ])
+    ->set('content.field_homepage_masthead', [
+      'weight' => '0',
+      'type' => 'entity_reference_revisions_entity_view',
+      'region' => 'content',
+      'label' => 'hidden',
+      'third_party_settings' => [],
+      'settings' => [
+        'view_mode' => 'default',
+        'link' => false,
+      ],
+    ])
+    ->save();
+}
+
+/**
+ * Implements hook_uninstall().
+ *
+ * @ingroup ubc_science_homepage_extend
+ */
+/*
+function ubc_science_homepage_extend_uninstall() {
+}
+*/
+
+ /**
+ * Update 9001 - sample update.
+ */
+ /*
+function ubc_science_homepage_extend_update_9001() {
+}
+*/

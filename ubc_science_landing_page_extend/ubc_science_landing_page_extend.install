@@ -1,0 +1,222 @@
+<?php
+
+/**
+ * Implements hook_install().
+ *
+ * @ingroup ubc_science_landing_page_extend
+ */
+function ubc_science_landing_page_extend_install() {
+  $config = \Drupal::service('config.factory');
+
+  // adjust the featured content view
+  $config->getEditable('views.view.content_landing_feature')
+    ->clear('display.default.display_options.filters.field_landing_feature_image_target_id')
+    ->save();
+  // add additional paragraph types to field
+  $config->getEditable('field.field.node.ubc_landing_page.field_landing_custom_content')
+    ->set('dependencies.config', [
+      'field.storage.node.field_landing_custom_content',
+      'node.type.ubc_landing_page',
+      'paragraphs.paragraphs_type.card_group',
+      'paragraphs.paragraphs_type.feature_image',
+      'paragraphs.paragraphs_type.tabcordion',
+      'paragraphs.paragraphs_type.text',
+      'paragraphs.paragraphs_type.text_links_image_region',
+      'paragraphs.paragraphs_type.text_links_region',
+    ])
+    ->set('settings.handler_settings.target_bundles', [
+      'card_group' => 'card_group',
+      'feature_image' => 'feature_image',
+      'tabcordion' => 'tabcordion',
+      'text' => 'text',
+      'text_links_region' => 'text_links_region',
+      'text_links_image_region' => 'text_links_image_region',
+    ])
+    ->set('settings.handler_settings.target_bundles_drag_drop', [
+      'card_group' => [
+        'weight' => '10',
+        'enabled' => true,
+      ],
+      'card_horizontal' => [
+        'weight' => '14',
+        'enabled' => false,
+      ],
+      'card_vertical' => [
+        'weight' => '15',
+        'enabled' => false,
+      ],
+      'feature_image' => [
+        'weight' => '11',
+        'enabled' => true,
+      ],
+      'icon_card' => [
+        'weight' => '12',
+        'enabled' => false,
+      ],
+      'image_card' => [
+        'weight' => '13',
+        'enabled' => false,
+      ],
+      'slide' => [
+        'weight' => '19',
+        'enabled' => false,
+      ],
+      'slideshow' => [
+        'weight' => '20',
+        'enabled' => true,
+      ],
+      'tab' => [
+        'weight' => '15',
+        'enabled' => false,
+      ],
+      'tabcordion' => [
+        'weight' => '16',
+        'enabled' => true,
+      ],
+      'text' => [
+        'weight' => '17',
+        'enabled' => true,
+      ],
+      'text_links_image_region' => [
+        'weight' => '25',
+        'enabled' => true,
+      ],
+      'text_links_region' => [
+        'weight' => '24',
+        'enabled' => true,
+      ],
+    ])
+    ->save();
+
+  // adjust the field_landing_feature_image title and help text
+  $config->getEditable('field.field.node.ubc_landing_page.field_landing_feature_image')
+    ->set('label', 'Card Image')
+    ->set('description',  'Add an image to the landing page to be used when displayed as a card. Card image must be at least 600x600.')
+    ->set('settings.min_resolution', '600x600')
+    ->save();
+  // adjust the form display
+  $config->getEditable('core.entity_form_display.node.ubc_landing_page.default')
+    ->clear('hidden.field_landing_masthead')
+    ->clear('content.field_landing_feature_image')
+    ->set('hidden', [
+      'field_landing_feature_image' => true,
+    ])
+    ->set('dependencies.config', [
+      'field.field.node.ubc_landing_page.body',
+      'field.field.node.ubc_landing_page.field_landing_custom_content',
+      'field.field.node.ubc_landing_page.field_landing_feature_image',
+      'field.field.node.ubc_landing_page.field_landing_masthead',
+      'field.field.node.ubc_landing_page.field_landing_meta_tags',
+      'field.field.node.ubc_landing_page.field_landing_tags',
+      'image.style.medium',
+      'node.type.ubc_landing_page',
+    ])
+    ->set('dependencies.module', [
+      'allowed_formats',
+      'field_group',
+      'maxlength',
+      'metatag',
+      'paragraphs',
+      'path',
+      'scheduler',
+      'text',
+    ])
+    ->set('content.field_landing_custom_content', [
+      'weight' => '3',
+      'type' => 'paragraphs',
+      'region' => 'content',
+      'third_party_settings' => [],
+      'settings' => [
+        'title' => 'Paragraph',
+        'title_plural' => 'Paragraphs',
+        'edit_mode' => 'closed',
+        'closed_mode' => 'summary',
+        'autocollapse' => 'none',
+        'closed_mode_threshold' => '0',
+        'add_mode' => 'button',
+        'placeholder' => '',
+        'form_display_mode' => 'default',
+        'default_paragraph_type' => '_none',
+        'features' => [
+          'add_above' => 'add_above',
+          'collapse_edit_all' => 'collapse_edit_all',
+          'duplicate' => 'duplicate',
+        ],
+      ],
+    ])
+    ->set('content.field_landing_masthead', [
+      'weight' => '1',
+      'type' => 'paragraphs',
+      'region' => 'content',
+      'third_party_settings' => [],
+      'settings' => [
+        'title' => 'Masthead',
+        'title_plural' => 'Masthead s',
+        'edit_mode' => 'open',
+        'closed_mode' => 'summary',
+        'autocollapse' => 'none',
+        'closed_mode_threshold' => '0',
+        'add_mode' => 'button',
+        'placeholder' => '',
+        'form_display_mode' => 'default',
+        'default_paragraph_type' => '_none',
+        'features' => [
+          'add_above' => '0',
+          'collapse_edit_all' => 'collapse_edit_all',
+          'duplicate' => 'duplicate',
+        ],
+      ],
+    ])
+    ->set('content.title.weight', '-10')
+    ->save();
+  // update the shown fields on the default display
+  $config->getEditable('core.entity_view_display.node.ubc_landing_page.default')
+    ->set('hidden', [
+      'field_landing_masthead' => true,
+    ])
+    ->save();
+  // update the shown fields on the featured_content display
+  $config->getEditable('core.entity_view_display.node.ubc_landing_page.featured_content')
+    ->set('hidden', [
+      'field_landing_feature_image' => true,
+    ])
+    ->clear('content.field_landing_feature_image')
+    ->set('dependencies.config', [
+      'core.entity_view_mode.node.featured_content',
+      'field.field.node.ubc_landing_page.body',
+      'field.field.node.ubc_landing_page.field_landing_custom_content',
+      'field.field.node.ubc_landing_page.field_landing_feature_image',
+      'field.field.node.ubc_landing_page.field_landing_masthead',
+      'field.field.node.ubc_landing_page.field_landing_meta_tags',
+      'field.field.node.ubc_landing_page.field_landing_tags',
+      'node.type.ubc_landing_page',
+    ])
+    ->set('content.field_landing_masthead', [
+      'weight' => '0',
+      'type' => 'entity_reference_revisions_entity_view',
+      'region' => 'content',
+      'label' => 'hidden',
+      'third_party_settings' => [],
+      'settings' => [
+        'view_mode' => 'default',
+        'link' => false,
+      ],
+    ])
+    ->save();
+}
+
+/**
+ * Implements hook_uninstall().
+ *
+ * @ingroup ubc_science_landing_page_extend
+ */
+function ubc_science_landing_page_extend_uninstall() {
+}
+
+ /**
+ * Update 9001 - sample update.
+ */
+ /*
+function ubc_science_landing_page_extend_update_9001() {
+}
+*/
