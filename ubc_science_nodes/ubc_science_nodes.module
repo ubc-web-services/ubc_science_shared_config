@@ -14,6 +14,8 @@ function ubc_science_nodes_form_node_form_alter(&$form, FormStateInterface $form
 
   // Find the content type of the node we are editing.
   $node = $form_state->getFormObject()->getEntity();
+  $module_handler = \Drupal::service('module_handler');
+  $module_path = $module_handler->getModule('ubc_science_nodes')->getPath();
 
   if (($node->getType() == 'ubc_landing_page') || ($node->getType() == 'homepage')) {
 
@@ -30,33 +32,33 @@ function ubc_science_nodes_form_node_form_alter(&$form, FormStateInterface $form
       '#title' => t("Complex Masthead Styles<br><small>* Note that if an image is added, it will replace the lower colour selected</small>"),
       '#suffix' => t('<ul style="list-style: none; padding-left: 0; display:flex; gap:1rem;" class="claro-details__description">
         <li>
-          <img src="/modules/contrib/ubc_science_nodes/img/complex-1.jpg" title="Complex masthead 1" />
+          <img src="/' . $module_path . '/img/complex-1.jpg" title="Complex masthead 1" />
           <p>Light blue upper, image lower</p>
         </li>
         <li>
-          <img src="/modules/contrib/ubc_science_nodes/img/complex-2.jpg" title="Complex masthead 2" />
+          <img src="/' . $module_path . '/img/complex-2.jpg" title="Complex masthead 2" />
           <p>Light blue upper, medium blue lower</p>
         </li>
         <li>
-          <img src="/modules/contrib/ubc_science_nodes/img/complex-3.jpg" title="Complex masthead 3" />
+          <img src="/' . $module_path . '/img/complex-3.jpg" title="Complex masthead 3" />
           <p>Light yellow upper, image lower</p>
         </li>
         <li>
-          <img src="/modules/contrib/ubc_science_nodes/img/complex-4.jpg" title="Complex masthead 4" />
+          <img src="/' . $module_path . '/img/complex-4.jpg" title="Complex masthead 4" />
           <p>Light yellow upper, medium yellow lower</p>
         </li>
       </ul>
       <ul style="list-style: none; padding-left: 0; display:flex; gap:1rem;" class="claro-details__description">
         <li>
-          <img src="/modules/contrib/ubc_science_nodes/img/complex-5.jpg" title="Complex masthead 5" />
+          <img src="/' . $module_path . '/img/complex-5.jpg" title="Complex masthead 5" />
           <p>White upper, image lower</p>
         </li>
         <li>
-          <img src="/modules/contrib/ubc_science_nodes/img/complex-6.jpg" title="Complex masthead 6" />
+          <img src="/' . $module_path . '/img/complex-6.jpg" title="Complex masthead 6" />
           <p>White upper, medium blue lower</p>
         </li>
         <li>
-          <img src="/modules/contrib/ubc_science_nodes/img/complex-7.jpg" title="Complex masthead 7" />
+          <img src="/' . $module_path . '/img/complex-7.jpg" title="Complex masthead 7" />
           <p>White upper, medium yellow lower</p>
         </li>
       </ul>'),
@@ -67,11 +69,11 @@ function ubc_science_nodes_form_node_form_alter(&$form, FormStateInterface $form
       '#title' => t("Simple Masthead Style"),
       '#suffix' => t('<ul style="list-style: none; padding-left: 0; display:flex; gap:1rem;" class="claro-details__description">
         <li>
-          <img src="/modules/contrib/ubc_science_nodes/img/simple-1.jpg" title="simple masthead 1" />
+          <img src="/' . $module_path . '/img/simple-1.jpg" title="simple masthead 1" />
           <p>Choice of background colour, severe angle, caption</p>
         </li>
         <li>
-          <img src="/modules/contrib/ubc_science_nodes/img/simple-2.jpg" title="simple masthead 2" />
+          <img src="/' . $module_path . '/img/simple-2.jpg" title="simple masthead 2" />
           <p>Choice of background colour, shallow angle, caption</p>
         </li>
       </ul>'),
