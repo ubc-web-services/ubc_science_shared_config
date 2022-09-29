@@ -8,22 +8,20 @@ dependencies:
     - image.style.medium
     - paragraphs.paragraphs_type.masthead
   module:
-    - focal_point
     - maxlength
+    - svg_image
 id: paragraph.masthead.default
 targetEntityType: paragraph
 bundle: masthead
 mode: default
 content:
   field_image:
-    type: image_focal_point
+    type: image_image
     weight: 3
     region: content
     settings:
       progress_indicator: throbber
       preview_image_style: medium
-      preview_link: true
-      offsets: '50,50'
     third_party_settings: {  }
   field_style:
     type: options_select
