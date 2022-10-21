@@ -115,13 +115,18 @@ function ubc_science_shared_config_install() {
       'settings' => [],
     ])
     ->save();
+  $config->getEditable('core.entity_form_display.paragraph.card_group.default')
+    ->set('third_party_settings.field_group.group_optional_title.weight', '0')
+    ->save();
   $config->getEditable('core.entity_form_display.paragraph.card_horizontal.default')
     ->set('content.field_paragraph_card_link.third_party_settings.maxlength', [
       'maxlength_js' => '100',
       'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
     ])
+    ->set('content.field_paragraph_card_title.weight', '-1')
     ->save();
   $config->getEditable('core.entity_form_display.paragraph.card_vertical.default')
+    ->set('content.field_paragraph_card_title.weight', '-1')
     ->set('content.field_paragraph_card_link.third_party_settings.maxlength', [
       'maxlength_js' => '100',
       'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
@@ -133,6 +138,7 @@ function ubc_science_shared_config_install() {
       'maxlength',
       'svg_image',
     ])
+    ->set('content.field_paragraph_feature_title.weight', '-1')
     ->set('content.field_paragraph_feature_link.third_party_settings.maxlength', [
       'maxlength_js' => '100',
       'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
@@ -144,6 +150,7 @@ function ubc_science_shared_config_install() {
       'maxlength',
       'media_library',
     ])
+    ->set('content.field_paragraph_icon_card_title.weight', '-1')
     ->set('content.field_paragraph_icon_card_link.third_party_settings.maxlength', [
       'maxlength_js' => '100',
       'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
@@ -155,6 +162,7 @@ function ubc_science_shared_config_install() {
       'maxlength',
       'media_library',
     ])
+    ->set('content.field_paragraph_card_title.weight', '-1')
     ->set('content.field_paragraph_card_link.third_party_settings.maxlength', [
       'maxlength_js' => '100',
       'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
