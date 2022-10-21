@@ -94,7 +94,12 @@ function ubc_science_profile_extend_install() {
       'weight' => '10',
       'type' => 'link_default',
       'region' => 'content',
-      'third_party_settings' => [],
+      'third_party_settings' => [
+        'maxlength' => [
+          'maxlength_js' => '100',
+          'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+        ],
+      ],
       'settings' => [
         'placeholder_url' => '',
         'placeholder_title' => '',

@@ -183,6 +183,7 @@ function ubc_science_homepage_extend_install() {
       'field_home_feature_image' => true,
       'field_feature_link' => true,
       'field_feature_text' => true,
+      'links' => true,
     ])
     ->set('dependencies.config', [
       'core.entity_view_mode.node.featured_content',
