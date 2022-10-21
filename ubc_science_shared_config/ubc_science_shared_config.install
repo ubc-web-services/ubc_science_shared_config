@@ -116,7 +116,7 @@ function ubc_science_shared_config_install() {
     ])
     ->save();
   $config->getEditable('core.entity_form_display.paragraph.card_group.default')
-    ->set('third_party_settings.field_group.group_optional_title.weight', '0')
+    ->set('third_party_settings.field_group.group_optional_title.weight', '-1')
     ->save();
   $config->getEditable('core.entity_form_display.paragraph.card_horizontal.default')
     ->set('content.field_paragraph_card_link.third_party_settings.maxlength', [
