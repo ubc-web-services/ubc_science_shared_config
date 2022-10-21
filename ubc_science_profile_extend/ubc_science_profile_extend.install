@@ -243,7 +243,228 @@ function ubc_science_profile_extend_uninstall() {
 /**
  * Update to allow allow unlimited departments / units.
  */
-/*
+
 function ubc_science_profile_extend_update_9001() {
+  $config = \Drupal::service('config.factory');
+
+  // adjust the field_profile_accreditation title and help text
+  $config->getEditable('field.field.node.ubc_profile.field_profile_accreditation')
+    ->set('label', 'Accreditation, Credentials')
+    ->save();
+  // adjust the form display
+  $config->getEditable('core.entity_form_display.node.ubc_profile.default')
+    ->clear('hidden.field_profile_address_tax')
+    ->clear('hidden.field_profile_rank')
+    ->clear('hidden.field_profile_sidebar_links')
+    ->clear('hidden.field_profile_type')
+    ->clear('content.field_profile_office')
+    ->set('hidden', [
+      'field_profile_office' => true,
+    ])
+    ->set('dependencies.config', [
+      'field.field.node.ubc_profile.body',
+      'field.field.node.ubc_profile.field_profile_accreditation',
+      'field.field.node.ubc_profile.field_profile_address_tax',
+      'field.field.node.ubc_profile.field_profile_department_unit',
+      'field.field.node.ubc_profile.field_profile_email',
+      'field.field.node.ubc_profile.field_profile_first_name',
+      'field.field.node.ubc_profile.field_profile_image',
+      'field.field.node.ubc_profile.field_profile_job_title',
+      'field.field.node.ubc_profile.field_profile_last_name',
+      'field.field.node.ubc_profile.field_profile_meta_tags',
+      'field.field.node.ubc_profile.field_profile_office',
+      'field.field.node.ubc_profile.field_profile_phone',
+      'field.field.node.ubc_profile.field_profile_pronouns',
+      'field.field.node.ubc_profile.field_profile_rank',
+      'field.field.node.ubc_profile.field_profile_sidebar_links',
+      'field.field.node.ubc_profile.field_profile_tags',
+      'field.field.node.ubc_profile.field_profile_type',
+      'image.style.medium',
+      'node.type.ubc_profile',
+    ])
+    ->set('dependencies.module', [
+      'allowed_formats',
+      'field_group',
+      'focal_point',
+      'link',
+      'maxlength',
+      'metatag',
+      'path',
+      'scheduler',
+      'telephone',
+      'text',
+    ])
+    ->set('third_party_settings.field_group.group_metadata.children', [
+      'field_profile_department_unit',
+      'field_profile_address_tax',
+      'field_profile_type',
+      'field_profile_rank',
+      'field_profile_tags',
+    ])
+    ->set('content.field_profile_department_unit', [
+      'weight' => '4',
+      'type' => 'options_select',
+      'region' => 'content',
+      'third_party_settings' => [],
+      'settings' => [],
+    ])
+    ->set('content.field_profile_address_tax', [
+      'weight' => '5',
+      'type' => 'options_select',
+      'region' => 'content',
+      'third_party_settings' => [],
+      'settings' => [],
+    ])
+    ->set('content.field_profile_rank', [
+      'weight' => '7',
+      'type' => 'options_select',
+      'region' => 'content',
+      'third_party_settings' => [],
+      'settings' => [],
+    ])
+    ->set('content.field_profile_type', [
+      'weight' => '6',
+      'type' => 'options_select',
+      'region' => 'content',
+      'third_party_settings' => [],
+      'settings' => [],
+    ])
+    ->set('content.field_profile_sidebar_links', [
+      'weight' => '10',
+      'type' => 'link_default',
+      'region' => 'content',
+      'third_party_settings' => [
+        'maxlength' => [
+          'maxlength_js' => '100',
+          'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+        ],
+      ],
+      'settings' => [
+        'placeholder_url' => '',
+        'placeholder_title' => '',
+      ],
+    ])
+    ->save();
+  $config->getEditable('core.entity_view_display.node.ubc_profile.default')
+    ->set('dependencies.config', [
+      'field.field.node.ubc_profile.body',
+      'field.field.node.ubc_profile.field_profile_accreditation',
+      'field.field.node.ubc_profile.field_profile_address_tax',
+      'field.field.node.ubc_profile.field_profile_department_unit',
+      'field.field.node.ubc_profile.field_profile_email',
+      'field.field.node.ubc_profile.field_profile_first_name',
+      'field.field.node.ubc_profile.field_profile_image',
+      'field.field.node.ubc_profile.field_profile_job_title',
+      'field.field.node.ubc_profile.field_profile_last_name',
+      'field.field.node.ubc_profile.field_profile_meta_tags',
+      'field.field.node.ubc_profile.field_profile_office',
+      'field.field.node.ubc_profile.field_profile_phone',
+      'field.field.node.ubc_profile.field_profile_pronouns',
+      'field.field.node.ubc_profile.field_profile_rank',
+      'field.field.node.ubc_profile.field_profile_sidebar_links',
+      'field.field.node.ubc_profile.field_profile_tags',
+      'field.field.node.ubc_profile.field_profile_type',
+      'image.style.landscape_600x400_focal_point',
+      'node.type.ubc_profile',
+    ])
+    ->set('dependencies.module', [
+      'link',
+      'metatag',
+      'svg_image',
+      'telephone',
+      'text',
+      'user',
+    ])
+    ->set('content.field_profile_address_tax', [
+      'weight' => '16',
+      'type' => 'entity_reference_label',
+      'region' => 'content',
+      'label' => 'hidden',
+      'third_party_settings' => [],
+      'settings' => [
+        'link' => false,
+      ],
+    ])
+    ->set('content.field_profile_rank', [
+      'weight' => '13',
+      'type' => 'entity_reference_label',
+      'region' => 'content',
+      'label' => 'hidden',
+      'third_party_settings' => [],
+      'settings' => [
+        'link' => false,
+      ],
+    ])
+    ->set('content.field_profile_type', [
+      'weight' => '14',
+      'type' => 'entity_reference_label',
+      'region' => 'content',
+      'label' => 'hidden',
+      'third_party_settings' => [],
+      'settings' => [
+        'link' => false,
+      ],
+    ])
+    ->set('content.field_profile_sidebar_links', [
+      'weight' => '10',
+      'type' => 'link',
+      'region' => 'content',
+      'label' => 'hidden',
+      'third_party_settings' => [],
+      'settings' => [
+        'trim_length' => '80',
+        'url_only' => false,
+        'url_plain' => false,
+        'rel' => '',
+        'target' => '',
+      ],
+    ])
+    ->save();
+  $config->getEditable('core.entity_view_display.node.ubc_profile.card_vertical')
+    ->set('dependencies.config', [
+      'core.entity_view_mode.node.card_vertical',
+      'field.field.node.ubc_profile.body',
+      'field.field.node.ubc_profile.field_profile_accreditation',
+      'field.field.node.ubc_profile.field_profile_address_tax',
+      'field.field.node.ubc_profile.field_profile_department_unit',
+      'field.field.node.ubc_profile.field_profile_email',
+      'field.field.node.ubc_profile.field_profile_first_name',
+      'field.field.node.ubc_profile.field_profile_image',
+      'field.field.node.ubc_profile.field_profile_job_title',
+      'field.field.node.ubc_profile.field_profile_last_name',
+      'field.field.node.ubc_profile.field_profile_meta_tags',
+      'field.field.node.ubc_profile.field_profile_office',
+      'field.field.node.ubc_profile.field_profile_phone',
+      'field.field.node.ubc_profile.field_profile_pronouns',
+      'field.field.node.ubc_profile.field_profile_rank',
+      'field.field.node.ubc_profile.field_profile_sidebar_links',
+      'field.field.node.ubc_profile.field_profile_tags',
+      'field.field.node.ubc_profile.field_profile_type',
+      'image.style.landscape_600x400_focal_point',
+      'node.type.ubc_profile',
+    ])
+    ->set('dependencies.module', [
+      'svg_image',
+      'user',
+    ])
+    ->set('content.field_profile_image', [
+      'weight' => '0',
+      'type' => 'image',
+      'region' => 'content',
+      'label' => 'hidden',
+      'third_party_settings' => [],
+      'settings' => [
+        'image_link' => '',
+        'image_style' => 'landscape_600x400_focal_point',
+        'svg_attributes' => [
+          'width' => null,
+          'height' => null,
+        ],
+        'svg_render_as_image' => true,
+        'image_loading' => [
+          'attribute' => 'lazy',
+        ],
+      ],
+    ])
+    ->save();
 }
-*/

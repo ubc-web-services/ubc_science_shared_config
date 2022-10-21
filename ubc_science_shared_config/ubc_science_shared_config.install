@@ -225,9 +225,9 @@ function ubc_science_shared_config_install() {
     ])
     ->save();
 
-    $config->getEditable('media_bulk_upload.media_bulk_config.bulk_upload_documents')
-      ->set('label', 'Bulk Upload Files')
-      ->save();
+  $config->getEditable('media_bulk_upload.media_bulk_config.bulk_upload_documents')
+    ->set('label', 'Bulk Upload Files')
+    ->save();
 
 }
 
@@ -364,17 +364,22 @@ function ubc_science_shared_config_update_9002() {
       'settings' => [],
     ])
     ->save();
+  $config->getEditable('core.entity_form_display.paragraph.card_group.default')
+    ->set('third_party_settings.field_group.group_optional_title.weight', '-1')
+    ->save();
   $config->getEditable('core.entity_form_display.paragraph.card_horizontal.default')
     ->set('content.field_paragraph_card_link.third_party_settings.maxlength', [
       'maxlength_js' => '100',
       'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
     ])
+    ->set('content.field_paragraph_card_title.weight', '-1')
     ->save();
   $config->getEditable('core.entity_form_display.paragraph.card_vertical.default')
     ->set('content.field_paragraph_card_link.third_party_settings.maxlength', [
       'maxlength_js' => '100',
       'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
     ])
+    ->set('content.field_paragraph_card_title.weight', '-1')
     ->save();
   $config->getEditable('core.entity_form_display.paragraph.feature_image.default')
     ->set('dependencies.module', [
@@ -382,6 +387,7 @@ function ubc_science_shared_config_update_9002() {
       'maxlength',
       'svg_image',
     ])
+    ->set('content.field_paragraph_feature_title.weight', '-1')
     ->set('content.field_paragraph_feature_link.third_party_settings.maxlength', [
       'maxlength_js' => '100',
       'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
@@ -393,6 +399,7 @@ function ubc_science_shared_config_update_9002() {
       'maxlength',
       'media_library',
     ])
+    ->set('content.field_paragraph_icon_card_title.weight', '-1')
     ->set('content.field_paragraph_icon_card_link.third_party_settings.maxlength', [
       'maxlength_js' => '100',
       'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
@@ -404,12 +411,68 @@ function ubc_science_shared_config_update_9002() {
       'maxlength',
       'media_library',
     ])
+    ->set('content.field_paragraph_card_title.weight', '-1')
     ->set('content.field_paragraph_card_link.third_party_settings.maxlength', [
       'maxlength_js' => '100',
       'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
     ])
     ->save();
-
+  // update condtional title view
+  $config->getEditable('views.view.content_conditional_title')
+    ->set('display.default.display_options.filters.field_landing_masthead_target_id', [
+      'id' => 'field_landing_masthead_target_id',
+      'table' => 'node__field_landing_masthead',
+      'field' => 'field_landing_masthead_target_id',
+      'relationship' => 'none',
+      'group_type' => 'group',
+      'admin_label' => '',
+      'plugin_id' => 'numeric',
+      'operator' => 'empty',
+      'value' => [
+        'min' => '',
+        'max' => '',
+        'value' => '',
+      ],
+      'group' => '1',
+      'exposed' => false,
+      'expose' => [
+        'operator_id' => '',
+        'label' => '',
+        'description' => '',
+        'use_operator' => true,
+        'operator' => '',
+        'operator_limit_selection' => true,
+        'operator_list' => [],
+        'identifier' => '',
+        'required' => true,
+        'remember' => true,
+        'multiple' => true,
+        'remember_roles' => [
+          'authenticated' => 'authenticated',
+        ],
+        'min_placeholder' => '',
+        'max_placeholder' => '',
+        'placeholder' => '',
+      ],
+      'is_grouped' => true,
+      'group_info' => [
+        'label' => '',
+        'description' => '',
+        'identifier' => '',
+        'optional' => true,
+        'widget' => 'select',
+        'multiple' => true,
+        'remember' => true,
+        'default_group' => 'All',
+        'default_group_multiple' => [],
+        'group_items' => [
+          '1' => [],
+          '2' => [],
+          '3' => [],
+        ],
+      ],
+    ])
+    ->save();
   $config->getEditable('media_bulk_upload.media_bulk_config.bulk_upload_documents')
     ->set('label', 'Bulk Upload Files')
     ->save();

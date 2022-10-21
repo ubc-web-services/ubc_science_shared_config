@@ -237,9 +237,159 @@ function ubc_science_announcement_extend_uninstall() {
  /**
  * Update 9001 - Update to adjust teaser view mode, makes external link visible
  */
-/*
+
 function ubc_science_announcement_extend_update_9001() {
-
+  $config = \Drupal::service('config.factory');
+  $config->getEditable('core.entity_form_display.node.ubc_announcement.default')
+    ->clear(
+      'hidden.field_announcement_department',
+      'hidden.field_announcement_image_caption',
+      'hidden.field_announcement_industry',
+      'hidden.field_announcement_media_contact',
+      'hidden.field_announcement_topic',
+    )
+    ->set('dependencies.module', [
+      'allowed_formats',
+      'field_group',
+      'focal_point',
+      'link',
+      'maxlength',
+      'metatag',
+      'path',
+      'scheduler',
+      'text',
+    ])
+    ->set('third_party_settings.field_group.group_feature_title_override.children', [
+      'field_announcement_type',
+      'field_announcement_department',
+      'field_announcement_industry',
+      'field_announcement_topic',
+      'field_announcement_media_contact',
+      'field_announcement_tags',
+    ])
+    ->set('content.body', [
+      'weight' => '3',
+      'type' => 'text_textarea_with_summary',
+      'region' => 'content',
+      'third_party_settings' => [
+        'maxlength' => [
+          'maxlength_js' => 'null',
+          'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+          'maxlength_js_summary' => '160',
+          'maxlength_js_label_summary' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+          'maxlength_js_enforce' => 'true',
+          'maxlength_js_truncate_html' => 'false',
+        ],
+        'allowed_formats' => [
+          'hide_help' => '0',
+          'hide_guidelines' => '0',
+        ],
+      ],
+      'settings' => [
+        'rows' => '9',
+        'placeholder' => '',
+        'summary_rows' => '3',
+        'show_summary' => 'true',
+      ],
+    ])
+    ->set('content.field_announcement_type', [
+      'weight' => '4',
+      'type' => 'options_select',
+      'region' => 'content',
+      'settings' => [],
+      'third_party_settings' => [],
+    ])
+    ->set('content.field_announcement_department', [
+      'weight' => '5',
+      'type' => 'options_select',
+      'region' => 'content',
+      'settings' => [],
+      'third_party_settings' => [],
+    ])
+    ->set('content.field_announcement_industry', [
+      'weight' => '6',
+      'type' => 'options_select',
+      'region' => 'content',
+      'settings' => [],
+      'third_party_settings' => [],
+    ])
+    ->set('content.field_announcement_topic', [
+      'weight' => '7',
+      'type' => 'options_select',
+      'region' => 'content',
+      'settings' => [],
+      'third_party_settings' => [],
+    ])
+    ->set('content.field_announcement_media_contact', [
+      'weight' => '8',
+      'type' => 'options_select',
+      'region' => 'content',
+      'settings' => [],
+      'third_party_settings' => [],
+    ])
+    ->set('content.field_announcement_external_link', [
+      'weight' => '3',
+      'type' => 'link_default',
+      'region' => 'content',
+      'third_party_settings' => [
+        'maxlength' => [
+          'maxlength_js' => '100',
+          'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+        ],
+      ],
+      'settings' => [
+        'placeholder_url' => '',
+        'placeholder_title' => '',
+      ],
+    ])
+    ->set('content.field_announcement_image_caption', [
+      'weight' => '2',
+      'type' => 'string_textfield',
+      'region' => 'content',
+      'third_party_settings' => [
+        'maxlength' => [
+          'maxlength_js' => '150',
+          'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+        ],
+      ],
+      'settings' => [
+        'size' => '60',
+        'placeholder' => 'Add a caption to the feature image if applicable.',
+      ],
+    ])
+    ->save();
+  $config->getEditable('field.field.node.ubc_announcement.field_announcement_feature_image')
+    ->set('description', 'Add a feature image to the announcement. Feature image must be at least 900x600.')
+    ->set('settings.file_extensions', 'png jpg jpeg')
+    ->set('settings.max_resolution', '980x653')
+    ->save();
+  $config->getEditable('core.entity_view_display.node.ubc_announcement.featured_content')
+    ->set('dependencies.config', [
+      'core.entity_view_mode.node.featured_content',
+      'field.field.node.ubc_announcement.body',
+      'field.field.node.ubc_announcement.field_announcement_department',
+      'field.field.node.ubc_announcement.field_announcement_external_link',
+      'field.field.node.ubc_announcement.field_announcement_feature_image',
+      'field.field.node.ubc_announcement.field_announcement_image_caption',
+      'field.field.node.ubc_announcement.field_announcement_industry',
+      'field.field.node.ubc_announcement.field_announcement_media_contact',
+      'field.field.nodeubc_announcement.field_announcement_meta_tags',
+      'field.field.node.ubc_announcement.field_announcement_tags',
+      'field.field.node.ubc_announcement.field_announcement_topic',
+      'field.field.node.node.ubc_announcement.field_announcement_type',
+      'node.type.ubc_announcement',
+      'responsive_image.styles.masthead_focal_point',
+    ])
+    ->set('content.field_announcement_feature_image.settings.responsive_image_style', 'masthead_focal_point')
+    ->set('content.field_announcement_image_caption', [
+      'weight' => '1',
+      'type' => 'string',
+      'region' => 'content',
+      'label' => 'hidden',
+      'third_party_settings' => [],
+      'settings' => [
+        'link_to_entity' => false,
+      ],
+    ])
+    ->save();
 }
-*/
-
