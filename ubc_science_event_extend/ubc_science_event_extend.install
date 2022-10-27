@@ -136,7 +136,8 @@ function ubc_science_event_extend_install() {
   $config->getEditable('field.field.node.ubc_event.field_event_image')
     ->set('description', 'Add a feature image to the event. Feature image must be at least 980x653.')
     ->set('settings.file_extensions', 'png jpg jpeg')
-    ->set('settings.max_resolution', '980x653')
+    ->set('settings.max_resolution', '')
+    ->set('settings.min_resolution', '980x653')
     ->save();
   $config->getEditable('core.entity_view_display.node.ubc_event.featured_content')
     ->set('dependencies.config', [
@@ -275,7 +276,8 @@ function ubc_science_event_extend_update_9001() {
   $config->getEditable('field.field.node.ubc_event.field_event_image')
     ->set('description', 'Add a feature image to the event. Feature image must be at least 980x653.')
     ->set('settings.file_extensions', 'png jpg jpeg')
-    ->set('settings.max_resolution', '980x653')
+    ->set('settings.max_resolution', '')
+    ->set('settings.min_resolution', '980x653')
     ->save();
   $config->getEditable('core.entity_view_display.node.ubc_event.featured_content')
     ->set('dependencies.config', [

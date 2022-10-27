@@ -82,9 +82,10 @@ function ubc_science_shared_config_install() {
   $config->getEditable('core.entity_form_display.media.image.default')
     ->clear(
       'hidden.name',
+      'hidden.replace_file',
     )
     ->set('dependencies.module', [
-      'svg_image',
+      'image',
       'path',
     ])
     ->set('content.name', [
@@ -345,9 +346,10 @@ function ubc_science_shared_config_update_9002() {
   $config->getEditable('core.entity_form_display.media.image.default')
     ->clear(
       'hidden.name',
+      'hidden.replace_file',
     )
     ->set('dependencies.module', [
-      'svg_image',
+      'image',
       'path',
     ])
     ->set('content.name', [
