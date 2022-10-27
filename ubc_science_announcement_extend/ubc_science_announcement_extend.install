@@ -190,9 +190,10 @@ function ubc_science_announcement_extend_install() {
     ])
     ->save();
   $config->getEditable('field.field.node.ubc_announcement.field_announcement_feature_image')
-    ->set('description', 'Add a feature image to the announcement. Feature image must be at least 900x600.')
+    ->set('description', 'Add a feature image to the announcement. Feature image must be at least 980x653.')
     ->set('settings.file_extensions', 'png jpg jpeg')
-    ->set('settings.max_resolution', '980x653')
+    ->set('settings.max_resolution', '')
+    ->set('settings.min_resolution', '980x653')
     ->save();
   $config->getEditable('core.entity_view_display.node.ubc_announcement.featured_content')
     ->set('dependencies.config', [
@@ -359,9 +360,10 @@ function ubc_science_announcement_extend_update_9001() {
     ])
     ->save();
   $config->getEditable('field.field.node.ubc_announcement.field_announcement_feature_image')
-    ->set('description', 'Add a feature image to the announcement. Feature image must be at least 900x600.')
+    ->set('description', 'Add a feature image to the announcement. Feature image must be at least 980x653.')
     ->set('settings.file_extensions', 'png jpg jpeg')
-    ->set('settings.max_resolution', '980x653')
+    ->set('settings.max_resolution', '')
+    ->set('settings.min_resolution', '980x653')
     ->save();
   $config->getEditable('core.entity_view_display.node.ubc_announcement.featured_content')
     ->set('dependencies.config', [
@@ -390,6 +392,28 @@ function ubc_science_announcement_extend_update_9001() {
       'settings' => [
         'link_to_entity' => false,
       ],
+    ])
+    ->save();
+}
+
+function ubc_science_announcement_extend_update_9002() {
+  $config = \Drupal::service('config.factory');
+  $config->getEditable('core.entity_view_display.node.ubc_announcement.featured_content')
+    ->set('dependencies.config', [
+      'core.entity_view_mode.node.featured_content',
+      'field.field.node.ubc_announcement.body',
+      'field.field.node.ubc_announcement.field_announcement_department',
+      'field.field.node.ubc_announcement.field_announcement_external_link',
+      'field.field.node.ubc_announcement.field_announcement_feature_image',
+      'field.field.node.ubc_announcement.field_announcement_image_caption',
+      'field.field.node.ubc_announcement.field_announcement_industry',
+      'field.field.node.ubc_announcement.field_announcement_media_contact',
+      'field.field.node.ubc_announcement.field_announcement_meta_tags',
+      'field.field.node.ubc_announcement.field_announcement_tags',
+      'field.field.node.ubc_announcement.field_announcement_topic',
+      'field.field.node.ubc_announcement.field_announcement_type',
+      'node.type.ubc_announcement',
+      'responsive_image.styles.masthead_focal_point',
     ])
     ->save();
 }
