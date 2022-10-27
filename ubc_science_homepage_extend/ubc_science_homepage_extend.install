@@ -208,6 +208,9 @@ function ubc_science_homepage_extend_install() {
       ],
     ])
     ->save();
+  $config->getEditable('field.field.node.homepage.field_home_feature_image')
+    ->set('settings.file_extensions', 'png jpg jpeg')
+    ->save();
 }
 
 /**
@@ -223,7 +226,10 @@ function ubc_science_homepage_extend_uninstall() {
  /**
  * Update 9001 - sample update.
  */
- /*
 function ubc_science_homepage_extend_update_9001() {
+  $config = \Drupal::service('config.factory');
+  $config->getEditable('field.field.node.homepage.field_home_feature_image')
+    ->set('settings.file_extensions', 'png jpg jpeg')
+    ->save();
 }
-*/
+

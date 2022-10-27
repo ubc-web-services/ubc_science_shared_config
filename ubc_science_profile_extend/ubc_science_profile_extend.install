@@ -228,6 +228,9 @@ function ubc_science_profile_extend_install() {
       ],
     ])
     ->save();
+  $config->getEditable('field.field.node.ubc_profile.field_profile_image')
+    ->set('settings.file_extensions', 'png jpg jpeg')
+    ->save();
 }
 
 /**
@@ -466,5 +469,12 @@ function ubc_science_profile_extend_update_9001() {
         ],
       ],
     ])
+    ->save();
+}
+
+function ubc_science_profile_extend_update_9002() {
+  $config = \Drupal::service('config.factory');
+  $config->getEditable('field.field.node.ubc_profile.field_profile_image')
+    ->set('settings.file_extensions', 'png jpg jpeg')
     ->save();
 }

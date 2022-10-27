@@ -228,7 +228,21 @@ function ubc_science_shared_config_install() {
   $config->getEditable('media_bulk_upload.media_bulk_config.bulk_upload_documents')
     ->set('label', 'Bulk Upload Files')
     ->save();
-
+  $config->getEditable('field.field.paragraph.masthead_simple.field_image')
+    ->set('settings.file_extensions', 'png jpg jpeg')
+    ->save();
+  $config->getEditable('field.field.paragraph.card_horizontal.field_paragraph_card_image')
+    ->set('settings.file_extensions', 'png jpg jpeg')
+    ->save();
+  $config->getEditable('field.field.paragraph.card_vertical.field_paragraph_card_image')
+    ->set('settings.file_extensions', 'png jpg jpeg')
+    ->save();
+  $config->getEditable('field.field.paragraph.feature_image.field_paragraph_feature_image')
+    ->set('settings.file_extensions', 'png jpg jpeg')
+    ->save();
+  $config->getEditable('field.field.paragraph.image_card.field_paragraph_card_image')
+    ->set('settings.file_extensions', 'png jpg jpeg')
+    ->save();
 }
 
 /**
@@ -475,5 +489,29 @@ function ubc_science_shared_config_update_9002() {
     ->save();
   $config->getEditable('media_bulk_upload.media_bulk_config.bulk_upload_documents')
     ->set('label', 'Bulk Upload Files')
+    ->save();
+}
+
+/**
+ * Update paragraph entities
+ */
+function ubc_science_shared_config_update_9003() {
+  // create the new configuration (will also be enabled upon install)
+  // now write to the new configuration
+  $config = \Drupal::service('config.factory');
+  $config->getEditable('field.field.paragraph.masthead_simple.field_image')
+    ->set('settings.file_extensions', 'png jpg jpeg')
+    ->save();
+  $config->getEditable('field.field.paragraph.card_horizontal.field_paragraph_card_image')
+    ->set('settings.file_extensions', 'png jpg jpeg')
+    ->save();
+  $config->getEditable('field.field.paragraph.card_vertical.field_paragraph_card_image')
+    ->set('settings.file_extensions', 'png jpg jpeg')
+    ->save();
+  $config->getEditable('field.field.paragraph.feature_image.field_paragraph_feature_image')
+    ->set('settings.file_extensions', 'png jpg jpeg')
+    ->save();
+  $config->getEditable('field.field.paragraph.image_card.field_paragraph_card_image')
+    ->set('settings.file_extensions', 'png jpg jpeg')
     ->save();
 }
