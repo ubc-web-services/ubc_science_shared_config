@@ -224,7 +224,7 @@ function ubc_science_homepage_extend_uninstall() {
 */
 
  /**
- * Update 9001 - sample update.
+ * Update 9001 - update feature image extentions
  */
 function ubc_science_homepage_extend_update_9001() {
   $config = \Drupal::service('config.factory');

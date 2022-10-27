@@ -215,7 +215,7 @@ function ubc_science_landing_page_extend_uninstall() {
 }
 
  /**
- * Update 9001 - sample update.
+ * Update 9001 - update feature image extensions
  */
 
 function ubc_science_landing_page_extend_update_9001() {

@@ -181,7 +181,7 @@ function ubc_science_event_extend_uninstall() {
 }
 
  /**
- * Update 9001 - sample update.
+ * Update 9001 - update event form, view mode and image field
  */
 function ubc_science_event_extend_update_9001() {
   $config = \Drupal::service('config.factory');

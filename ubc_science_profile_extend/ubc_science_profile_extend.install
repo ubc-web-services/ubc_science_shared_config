@@ -244,7 +244,7 @@ function ubc_science_profile_extend_uninstall() {
 /*
 
 /**
- * Update to allow allow unlimited departments / units.
+ * Update profile accreditation field, view modes and form display
  */
 
 function ubc_science_profile_extend_update_9001() {

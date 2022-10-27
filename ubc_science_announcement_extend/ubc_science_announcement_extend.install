@@ -236,7 +236,7 @@ function ubc_science_announcement_extend_uninstall() {
 }
 
  /**
- * Update 9001 - Update to adjust teaser view mode, makes external link visible
+ * Update 9001 - Update to form and view modes for announcement
  */
 
 function ubc_science_announcement_extend_update_9001() {
@@ -396,6 +396,9 @@ function ubc_science_announcement_extend_update_9001() {
     ->save();
 }
 
+ /**
+ * Update 9002 - Update to display mode for announcement
+ */
 function ubc_science_announcement_extend_update_9002() {
   $config = \Drupal::service('config.factory');
   $config->getEditable('core.entity_view_display.node.ubc_announcement.featured_content')
