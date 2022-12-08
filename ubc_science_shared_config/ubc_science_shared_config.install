@@ -54,31 +54,6 @@ td.w-one-quarter|Column width: 1/4
 td.w-one-fifth|Column width: 1/5
 td.w-one-sixth|Column width: 1/6')
     ->save();
-  $config->getEditable('core.entity_form_display.media.file.default')
-    ->clear(
-      'hidden.field_media_file',
-      'hidden.replace_file',
-    )
-    ->set('dependencies.module', [
-      'file',
-      'path',
-    ])
-    ->set('content.field_media_file', [
-      'weight' => '2',
-      'type' => 'file_generic',
-      'region' => 'content',
-      'third_party_settings' => [],
-      'settings' => [
-        'progress_indicator' => 'throbber',
-      ],
-    ])
-    ->set('content.replace_file', [
-      'weight' => '3',
-      'region' => 'content',
-      'third_party_settings' => [],
-      'settings' => [],
-    ])
-    ->save();
   $config->getEditable('core.entity_form_display.media.image.default')
     ->clear(
       'hidden.name',
@@ -318,31 +293,6 @@ function ubc_science_shared_config_update_9002() {
   // now write to the new configuration
   $config = \Drupal::service('config.factory');
 
-  $config->getEditable('core.entity_form_display.media.file.default')
-    ->clear(
-      'hidden.field_media_file',
-      'hidden.replace_file',
-    )
-    ->set('dependencies.module', [
-      'file',
-      'path',
-    ])
-    ->set('content.field_media_file', [
-      'weight' => '2',
-      'type' => 'file_generic',
-      'region' => 'content',
-      'third_party_settings' => [],
-      'settings' => [
-        'progress_indicator' => 'throbber',
-      ],
-    ])
-    ->set('content.replace_file', [
-      'weight' => '3',
-      'region' => 'content',
-      'third_party_settings' => [],
-      'settings' => [],
-    ])
-    ->save();
   $config->getEditable('core.entity_form_display.media.image.default')
     ->clear(
       'hidden.name',
