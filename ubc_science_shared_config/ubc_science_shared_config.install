@@ -42,7 +42,7 @@ ol.list-bordered|Ordered List: bordered
 ol.list-checked|Ordered List: checked
 ol.button-list|Ordered List: buttons
 ol.button-list.list-grid--two|Ordered List: 2 across
-nol.button-list.list-grid--three|Ordered List: 3 across
+ol.button-list.list-grid--three|Ordered List: 3 across
 ol.button-list.list-grid--four|Ordered List: 4 across
 table.table--plain|Table: plain
 table.table--condensed|Table: condensed
@@ -271,7 +271,7 @@ ol.list-bordered|Ordered List: bordered
 ol.list-checked|Ordered List: checked
 ol.button-list|Ordered List: buttons
 ol.button-list.list-grid--two|Ordered List: 2 across
-nol.button-list.list-grid--three|Ordered List: 3 across
+ol.button-list.list-grid--three|Ordered List: 3 across
 ol.button-list.list-grid--four|Ordered List: 4 across
 table.table--plain|Table: plain
 table.table--condensed|Table: condensed
