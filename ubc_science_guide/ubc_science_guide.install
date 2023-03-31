@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * Implements hook_install().
+ *
+ * @ingroup ubc_science_guide_extend
+ */
+function ubc_science_guide_extend_install() {
+}
+
+/**
+ * Implements hook_uninstall().
+ *
+ * @ingroup ubc_science_guide_extend
+ */
+/*
+function ubc_science_guide_extend_uninstall() {
+}
+/*
+
+/**
+ * Update profile accreditation field, view modes and form display
+ */
+/*
+function ubc_science_guide_extend_update_9001() {
+}
+*/

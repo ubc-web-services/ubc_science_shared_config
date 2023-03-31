@@ -1,0 +1,7 @@
+name: UBC Science Guide Content Type
+type: module
+description: This module provides the custom UBC Guide content type and its fields.
+package: UBC Web Services
+dependencies:
+  - ubc_science_shared_config:ubc_science_shared_config
+core_version_requirement: ^9 || ^10
