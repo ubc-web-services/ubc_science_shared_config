@@ -9,5 +9,4 @@ dependencies:
   - ubc_science_landing_page_extend:ubc_science_landing_page_extend
   - ubc_science_profile_extend:ubc_science_profile_extend
   - ubc_science_shared_config:ubc_science_shared_config
-core: '8.x'
-core_version_requirement: ^8 || ^9
+core_version_requirement: ^9 || ^10

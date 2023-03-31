@@ -4,6 +4,4 @@ description: This module alters the node add and edit forms to add some custom m
 package: UBC Web Services
 dependencies:
   - ckeditor
-
-core: '8.x'
-core_version_requirement: ^8 || ^9
+core_version_requirement: ^9 || ^10
