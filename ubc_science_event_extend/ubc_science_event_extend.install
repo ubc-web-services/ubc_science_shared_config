@@ -19,10 +19,12 @@ function ubc_science_event_extend_install() {
     ->set('dependencies.config', [
       'field.field.node.ubc_event.body',
       'field.field.node.ubc_event.field_event_category',
+      'field.field.node.ubc_event.field_event_cost',
       'field.field.node.ubc_event.field_event_date',
       'field.field.node.ubc_event.field_event_image',
       'field.field.node.ubc_event.field_event_image_caption',
       'field.field.node.ubc_event.field_event_is_ongoing',
+      'field.field.node.ubc_event.field_event_is_virtual',
       'field.field.node.ubc_event.field_event_link',
       'field.field.node.ubc_event.field_event_location',
       'field.field.node.ubc_event.field_event_map',
@@ -42,8 +44,29 @@ function ubc_science_event_extend_install() {
       'weight' => '8',
       'region' => 'content',
     ])
-    ->save();
+    ->set('content.field_event_cost', [
+      'type' => 'string',
+      'settings' => [
+        'link_to_entity' => false,
+      ],
+      'third_party_settings' => [],
+      'weight' => '7',
+      'region' => 'content',
+    ])
+    ->set('content.field_event_is_virtual', [
 
+      'type' => 'boolean',
+      'label' => 'above',
+      'settings' => [
+        'format' => 'default',
+        'format_custom_false' => '',
+        'format_custom_true' => '',
+      ],
+      'third_party_settings' => [],
+      'weight' => '6',
+      'region' => 'content',
+    ])
+    ->save();
 
   // set up the new fields on the form display
   $config->getEditable('core.entity_form_display.node.ubc_event.default')
@@ -51,6 +74,25 @@ function ubc_science_event_extend_install() {
       'hidden.field_event_image_caption',
       'hidden.field_event_media_contact',
     )
+    ->set('dependencies.config', [
+      'field.field.node.ubc_event.body',
+      'field.field.node.ubc_event.field_event_category',
+      'field.field.node.ubc_event.field_event_cost',
+      'field.field.node.ubc_event.field_event_date',
+      'field.field.node.ubc_event.field_event_image',
+      'field.field.node.ubc_event.field_event_image_caption',
+      'field.field.node.ubc_event.field_event_is_ongoing',
+      'field.field.node.ubc_event.field_event_is_virtual',
+      'field.field.node.ubc_event.field_event_link',
+      'field.field.node.ubc_event.field_event_location',
+      'field.field.node.ubc_event.field_event_map',
+      'field.field.node.ubc_event.field_event_media_contact',
+      'field.field.node.ubc_event.field_event_meta_tags',
+      'field.field.node.ubc_event.field_event_private',
+      'field.field.node.ubc_event.field_event_tags',
+      'image.style.medium',
+      'node.type.ubc_event',
+    ])
     ->set('dependencies.module', [
       'address',
       'allowed_formats',
@@ -131,6 +173,26 @@ function ubc_science_event_extend_install() {
       'region' => 'content',
       'third_party_settings' => [],
       'settings' => [],
+    ])
+    ->set('content.field_event_cost', [
+      'type' => 'string_textfield',
+      'label' => 'hidden',
+      'settings' => [
+        'size' => '60',
+        'placeholder'=> '',
+      ],
+      'third_party_settings' => [],
+      'region' => 'content',
+      'weight' => '6',
+    ])
+    ->set('content.field_event_is_virtual', [
+      'type' => 'boolean_checkbox',
+      'weight' => '5',
+      'region' => 'content',
+      'settings' => [
+        'display_label' => true,
+      ],
+      'third_party_settings' => [],
     ])
     ->save();
   $config->getEditable('field.field.node.ubc_event.field_event_image')
@@ -312,3 +374,89 @@ function ubc_science_event_extend_update_9001() {
     ->save();
 }
 
+function ubc_science_event_extend_update_9002() {
+  $config = \Drupal::service('config.factory');
+  $config->getEditable('core.entity_form_display.node.ubc_event.default')
+    ->set('dependencies.config', [
+      'field.field.node.ubc_event.body',
+      'field.field.node.ubc_event.field_event_category',
+      'field.field.node.ubc_event.field_event_cost',
+      'field.field.node.ubc_event.field_event_date',
+      'field.field.node.ubc_event.field_event_image',
+      'field.field.node.ubc_event.field_event_image_caption',
+      'field.field.node.ubc_event.field_event_is_ongoing',
+      'field.field.node.ubc_event.field_event_is_virtual',
+      'field.field.node.ubc_event.field_event_link',
+      'field.field.node.ubc_event.field_event_location',
+      'field.field.node.ubc_event.field_event_map',
+      'field.field.node.ubc_event.field_event_media_contact',
+      'field.field.node.ubc_event.field_event_meta_tags',
+      'field.field.node.ubc_event.field_event_private',
+      'field.field.node.ubc_event.field_event_tags',
+      'image.style.medium',
+      'node.type.ubc_event',
+    ])
+    ->set('content.field_event_cost', [
+      'type' => 'string_textfield',
+      'label' => 'hidden',
+      'settings' => [
+        'size' => '60',
+        'placeholder'=> '',
+      ],
+      'third_party_settings' => [],
+      'region' => 'content',
+      'weight' => '6',
+    ])
+    ->set('content.field_event_is_virtual', [
+      'type' => 'boolean_checkbox',
+      'weight' => '5',
+      'region' => 'content',
+      'settings' => [
+        'display_label' => true,
+      ],
+      'third_party_settings' => [],
+    ])
+    ->save();
+  $config->getEditable('core.entity_view_display.node.ubc_event.default')
+    ->set('dependencies.config', [
+      'field.field.node.ubc_event.body',
+      'field.field.node.ubc_event.field_event_category',
+      'field.field.node.ubc_event.field_event_cost',
+      'field.field.node.ubc_event.field_event_date',
+      'field.field.node.ubc_event.field_event_image',
+      'field.field.node.ubc_event.field_event_image_caption',
+      'field.field.node.ubc_event.field_event_is_ongoing',
+      'field.field.node.ubc_event.field_event_is_virtual',
+      'field.field.node.ubc_event.field_event_link',
+      'field.field.node.ubc_event.field_event_location',
+      'field.field.node.ubc_event.field_event_map',
+      'field.field.node.ubc_event.field_event_media_contact',
+      'field.field.node.ubc_event.field_event_meta_tags',
+      'field.field.node.ubc_event.field_event_private',
+      'field.field.node.ubc_event.field_event_tags',
+      'node.type.ubc_event',
+    ])
+    ->set('content.field_event_cost', [
+      'type' => 'string',
+      'settings' => [
+        'link_to_entity' => false,
+      ],
+      'third_party_settings' => [],
+      'weight' => '10',
+      'region' => 'content',
+    ])
+    ->set('content.field_event_is_virtual', [
+
+      'type' => 'boolean',
+      'label' => 'above',
+      'settings' => [
+        'format' => 'default',
+        'format_custom_false' => '',
+        'format_custom_true' => '',
+      ],
+      'third_party_settings' => [],
+      'weight' => '31',
+      'region' => 'content',
+    ])
+    ->save();
+}

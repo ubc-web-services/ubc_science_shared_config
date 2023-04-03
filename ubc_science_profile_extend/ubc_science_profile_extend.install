@@ -35,16 +35,19 @@ function ubc_science_profile_extend_install() {
       'field.field.node.ubc_profile.field_profile_meta_tags',
       'field.field.node.ubc_profile.field_profile_office',
       'field.field.node.ubc_profile.field_profile_phone',
+      'field.field.node.ubc_profile.field_profile_program',
       'field.field.node.ubc_profile.field_profile_pronouns',
       'field.field.node.ubc_profile.field_profile_rank',
       'field.field.node.ubc_profile.field_profile_sidebar_links',
       'field.field.node.ubc_profile.field_profile_tags',
       'field.field.node.ubc_profile.field_profile_type',
+      'field.field.node.ubc_profile.field_profile_year',
       'image.style.medium',
       'node.type.ubc_profile',
     ])
     ->set('dependencies.module', [
       'allowed_formats',
+      'conditional_fields',
       'field_group',
       'focal_point',
       'link',
@@ -59,15 +62,10 @@ function ubc_science_profile_extend_install() {
       'field_profile_department_unit',
       'field_profile_address_tax',
       'field_profile_type',
+      'field_profile_program',
+      'field_profile_year',
       'field_profile_rank',
       'field_profile_tags',
-    ])
-    ->set('content.field_profile_department_unit', [
-      'weight' => '4',
-      'type' => 'options_select',
-      'region' => 'content',
-      'third_party_settings' => [],
-      'settings' => [],
     ])
     ->set('content.field_profile_address_tax', [
       'weight' => '5',
@@ -76,19 +74,52 @@ function ubc_science_profile_extend_install() {
       'third_party_settings' => [],
       'settings' => [],
     ])
-    ->set('content.field_profile_rank', [
-      'weight' => '7',
+    ->set('content.field_profile_department_unit', [
+      'weight' => '4',
       'type' => 'options_select',
       'region' => 'content',
       'third_party_settings' => [],
       'settings' => [],
     ])
-    ->set('content.field_profile_type', [
-      'weight' => '6',
+    ->set('content.field_profile_job_title', [
+      'weight' => '4',
+      'type' => 'string_textfield',
+      'region' => 'content',
+      'settings' => [
+        'size' => '60',
+        'placeholder' => '',
+      ],
+      'third_party_settings' => [
+        'maxlength' => [
+          'maxlength_js' => '255',
+          'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+        ],
+        'conditional_fields' => [],
+      ],
+    ])
+    ->set('content.field_profile_program', [
+      'weight' => '30',
+      'type' => 'string_textfield',
+      'region' => 'content',
+      'settings' => [
+        'size' => '60',
+        'placeholder' => '',
+      ],
+      'third_party_settings' => [
+        'maxlength' => [
+          'maxlength_js' => '255',
+          'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+          'maxlength_js_enforce' => false,
+        ],
+        'conditional_fields' => [],
+      ],
+    ])
+    ->set('content.field_profile_rank', [
+      'weight' => '32',
       'type' => 'options_select',
       'region' => 'content',
-      'third_party_settings' => [],
       'settings' => [],
+      'third_party_settings' => [],
     ])
     ->set('content.field_profile_sidebar_links', [
       'weight' => '10',
@@ -103,6 +134,24 @@ function ubc_science_profile_extend_install() {
       'settings' => [
         'placeholder_url' => '',
         'placeholder_title' => '',
+      ],
+    ])
+    ->set('content.field_profile_type', [
+      'weight' => '6',
+      'type' => 'options_select',
+      'region' => 'content',
+      'third_party_settings' => [],
+      'settings' => [],
+    ])
+    ->set('content.field_profile_year', [
+      'weight' => '31',
+      'type' => 'number',
+      'region' => 'content',
+      'settings' => [
+        'placeholder' => '',
+      ],
+      'third_party_settings' => [
+        'conditional_fields' => [],
       ],
     ])
     ->save();
@@ -120,11 +169,13 @@ function ubc_science_profile_extend_install() {
       'field.field.node.ubc_profile.field_profile_meta_tags',
       'field.field.node.ubc_profile.field_profile_office',
       'field.field.node.ubc_profile.field_profile_phone',
+      'field.field.node.ubc_profile.field_profile_program',
       'field.field.node.ubc_profile.field_profile_pronouns',
       'field.field.node.ubc_profile.field_profile_rank',
       'field.field.node.ubc_profile.field_profile_sidebar_links',
       'field.field.node.ubc_profile.field_profile_tags',
       'field.field.node.ubc_profile.field_profile_type',
+      'field.field.node.ubc_profile.field_profile_year',
       'image.style.landscape_600x400_focal_point',
       'node.type.ubc_profile',
     ])
@@ -180,6 +231,75 @@ function ubc_science_profile_extend_install() {
         'target' => '',
       ],
     ])
+    ->set('content.field_profile_program', [
+      'type' => 'string',
+      'label' => 'hidden',
+      'settings' => [
+        'link_to_entity' => false,
+      ],
+      'third_party_settings' => [],
+      'region' => 'content',
+      'weight' => '17',
+    ])
+    ->set('content.field_profile_year', [
+      'type' => 'number_integer',
+      'label' => 'hidden',
+      'settings' => [
+        'thousand_separator' => '',
+        'prefix_suffix' => true,
+      ],
+      'third_party_settings' => [],
+      'region' => 'content',
+      'weight' => '18',
+    ])
+    ->save();
+  $config->getEditable('core.entity_view_display.node.ubc_profile.card_horizontal')
+    ->set('dependencies.config', [
+      'core.entity_view_mode.node.card_horizontal',
+      'field.field.node.ubc_profile.body',
+      'field.field.node.ubc_profile.field_profile_accreditation',
+      'field.field.node.ubc_profile.field_profile_address_tax',
+      'field.field.node.ubc_profile.field_profile_department_unit',
+      'field.field.node.ubc_profile.field_profile_email',
+      'field.field.node.ubc_profile.field_profile_first_name',
+      'field.field.node.ubc_profile.field_profile_image',
+      'field.field.node.ubc_profile.field_profile_job_title',
+      'field.field.node.ubc_profile.field_profile_last_name',
+      'field.field.node.ubc_profile.field_profile_meta_tags',
+      'field.field.node.ubc_profile.field_profile_office',
+      'field.field.node.ubc_profile.field_profile_phone',
+      'field.field.node.ubc_profile.field_profile_program',
+      'field.field.node.ubc_profile.field_profile_pronouns',
+      'field.field.node.ubc_profile.field_profile_rank',
+      'field.field.node.ubc_profile.field_profile_sidebar_links',
+      'field.field.node.ubc_profile.field_profile_tags',
+      'field.field.node.ubc_profile.field_profile_type',
+      'field.field.node.ubc_profile.field_profile_year',
+      'image.style.square_200',
+      'node.type.ubc_profile',
+    ])
+    ->set('dependencies.module', [
+      'svg_image',
+      'user',
+    ])
+    ->set('hidden', [
+      'body' => true,
+      'field_profile_address_tax' => true,
+      'field_profile_email' => true,
+      'field_profile_first_name' => true,
+      'field_profile_last_name' => true,
+      'field_profile_meta_tags' => true,
+      'field_profile_office' => true,
+      'field_profile_phone' => true,
+      'field_profile_program' => true,
+      'field_profile_pronouns' => true,
+      'field_profile_rank' => true,
+      'field_profile_sidebar_links' => true,
+      'field_profile_tags' => true,
+      'field_profile_type' => true,
+      'field_profile_year' => true,
+      'links' => true,
+    ])
     ->save();
   $config->getEditable('core.entity_view_display.node.ubc_profile.card_vertical')
     ->set('dependencies.config', [
@@ -196,11 +316,13 @@ function ubc_science_profile_extend_install() {
       'field.field.node.ubc_profile.field_profile_meta_tags',
       'field.field.node.ubc_profile.field_profile_office',
       'field.field.node.ubc_profile.field_profile_phone',
+      'field.field.node.ubc_profile.field_profile_program',
       'field.field.node.ubc_profile.field_profile_pronouns',
       'field.field.node.ubc_profile.field_profile_rank',
       'field.field.node.ubc_profile.field_profile_sidebar_links',
       'field.field.node.ubc_profile.field_profile_tags',
       'field.field.node.ubc_profile.field_profile_type',
+      'field.field.node.ubc_profile.field_profile_year',
       'image.style.landscape_600x400_focal_point',
       'node.type.ubc_profile',
     ])
@@ -226,6 +348,71 @@ function ubc_science_profile_extend_install() {
           'attribute' => 'lazy',
         ],
       ],
+    ])
+    ->set('hidden', [
+      'body' => true,
+      'field_profile_address_tax' => true,
+      'field_profile_email' => true,
+      'field_profile_first_name' => true,
+      'field_profile_last_name' => true,
+      'field_profile_meta_tags' => true,
+      'field_profile_office' => true,
+      'field_profile_phone' => true,
+      'field_profile_program' => true,
+      'field_profile_pronouns' => true,
+      'field_profile_rank' => true,
+      'field_profile_sidebar_links' => true,
+      'field_profile_tags' => true,
+      'field_profile_type' => true,
+      'field_profile_year' => true,
+      'links' => true,
+    ])
+    ->save();
+  $config->getEditable('core.entity_view_display.node.ubc_profile.teaser')
+    ->set('dependencies.config', [
+      'core.entity_view_mode.node.teaser',
+      'field.field.node.ubc_profile.body',
+      'field.field.node.ubc_profile.field_profile_accreditation',
+      'field.field.node.ubc_profile.field_profile_address_tax',
+      'field.field.node.ubc_profile.field_profile_department_unit',
+      'field.field.node.ubc_profile.field_profile_email',
+      'field.field.node.ubc_profile.field_profile_first_name',
+      'field.field.node.ubc_profile.field_profile_image',
+      'field.field.node.ubc_profile.field_profile_job_title',
+      'field.field.node.ubc_profile.field_profile_last_name',
+      'field.field.node.ubc_profile.field_profile_meta_tags',
+      'field.field.node.ubc_profile.field_profile_office',
+      'field.field.node.ubc_profile.field_profile_phone',
+      'field.field.node.ubc_profile.field_profile_program',
+      'field.field.node.ubc_profile.field_profile_pronouns',
+      'field.field.node.ubc_profile.field_profile_rank',
+      'field.field.node.ubc_profile.field_profile_sidebar_links',
+      'field.field.node.ubc_profile.field_profile_tags',
+      'field.field.node.ubc_profile.field_profile_type',
+      'field.field.node.ubc_profile.field_profile_year',
+      'node.type.ubc_profile',
+    ])
+    ->set('dependencies.module', [
+      'telephone',
+      'user',
+    ])
+    ->set('hidden', [
+      'body' => true,
+      'field_profile_accreditation' => true,
+      'field_profile_address_tax' => true,
+      'field_profile_first_name' => true,
+      'field_profile_image' => true,
+      'field_profile_last_name' => true,
+      'field_profile_meta_tags' => true,
+      'field_profile_office' => true,
+      'field_profile_program' => true,
+      'field_profile_pronouns' => true,
+      'field_profile_rank' => true,
+      'field_profile_sidebar_links' => true,
+      'field_profile_tags' => true,
+      'field_profile_type' => true,
+      'field_profile_year' => true,
+      'links' => true,
     ])
     ->save();
   $config->getEditable('field.field.node.ubc_profile.field_profile_image')
@@ -362,11 +549,13 @@ function ubc_science_profile_extend_update_9001() {
       'field.field.node.ubc_profile.field_profile_meta_tags',
       'field.field.node.ubc_profile.field_profile_office',
       'field.field.node.ubc_profile.field_profile_phone',
+      'field.field.node.ubc_profile.field_profile_program',
       'field.field.node.ubc_profile.field_profile_pronouns',
       'field.field.node.ubc_profile.field_profile_rank',
       'field.field.node.ubc_profile.field_profile_sidebar_links',
       'field.field.node.ubc_profile.field_profile_tags',
       'field.field.node.ubc_profile.field_profile_type',
+      'field.field.node.ubc_profile.field_profile_year',
       'image.style.landscape_600x400_focal_point',
       'node.type.ubc_profile',
     ])
@@ -387,6 +576,16 @@ function ubc_science_profile_extend_update_9001() {
       'settings' => [
         'link' => false,
       ],
+    ])
+    ->set('content.field_profile_program', [
+      'type' => 'string',
+      'label' => 'hidden',
+      'settings' => [
+        'link_to_entity' => false,
+      ],
+      'third_party_settings' => [],
+      'region' => 'content',
+      'weight' => '17',
     ])
     ->set('content.field_profile_rank', [
       'weight' => '13',
@@ -421,6 +620,17 @@ function ubc_science_profile_extend_update_9001() {
         'rel' => '',
         'target' => '',
       ],
+    ])
+    ->set('content.field_profile_year', [
+      'type' => 'number_integer',
+      'label' => 'hidden',
+      'settings' => [
+        'thousand_separator' => '',
+        'prefix_suffix' => true,
+      ],
+      'third_party_settings' => [],
+      'region' => 'content',
+      'weight' => '18',
     ])
     ->save();
   $config->getEditable('core.entity_view_display.node.ubc_profile.card_vertical')
@@ -476,5 +686,316 @@ function ubc_science_profile_extend_update_9002() {
   $config = \Drupal::service('config.factory');
   $config->getEditable('field.field.node.ubc_profile.field_profile_image')
     ->set('settings.file_extensions', 'png jpg jpeg')
+    ->save();
+}
+
+function ubc_science_profile_extend_update_9003() {
+  $config = \Drupal::service('config.factory');
+  $config->getEditable('core.entity_form_display.node.ubc_profile.default')
+    ->set('dependencies.config', [
+      'field.field.node.ubc_profile.body',
+      'field.field.node.ubc_profile.field_profile_accreditation',
+      'field.field.node.ubc_profile.field_profile_address_tax',
+      'field.field.node.ubc_profile.field_profile_department_unit',
+      'field.field.node.ubc_profile.field_profile_email',
+      'field.field.node.ubc_profile.field_profile_first_name',
+      'field.field.node.ubc_profile.field_profile_image',
+      'field.field.node.ubc_profile.field_profile_job_title',
+      'field.field.node.ubc_profile.field_profile_last_name',
+      'field.field.node.ubc_profile.field_profile_meta_tags',
+      'field.field.node.ubc_profile.field_profile_office',
+      'field.field.node.ubc_profile.field_profile_phone',
+      'field.field.node.ubc_profile.field_profile_program',
+      'field.field.node.ubc_profile.field_profile_pronouns',
+      'field.field.node.ubc_profile.field_profile_rank',
+      'field.field.node.ubc_profile.field_profile_sidebar_links',
+      'field.field.node.ubc_profile.field_profile_tags',
+      'field.field.node.ubc_profile.field_profile_type',
+      'field.field.node.ubc_profile.field_profile_year',
+      'image.style.medium',
+      'node.type.ubc_profile',
+    ])
+    ->set('dependencies.module', [
+      'allowed_formats',
+      'conditional_fields',
+      'field_group',
+      'focal_point',
+      'link',
+      'maxlength',
+      'metatag',
+      'path',
+      'scheduler',
+      'telephone',
+      'text',
+    ])
+    ->set('third_party_settings.field_group.group_metadata.children', [
+      'field_profile_department_unit',
+      'field_profile_address_tax',
+      'field_profile_type',
+      'field_profile_program',
+      'field_profile_year',
+      'field_profile_rank',
+      'field_profile_tags',
+    ])
+    ->set('content.field_profile_job_title', [
+      'weight' => '4',
+      'type' => 'string_textfield',
+      'region' => 'content',
+      'settings' => [
+        'size' => '60',
+        'placeholder' => '',
+      ],
+      'third_party_settings' => [
+        'maxlength' => [
+          'maxlength_js' => '255',
+          'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+        ],
+        'conditional_fields' => [],
+      ],
+    ])
+    ->set('content.field_profile_program', [
+      'weight' => '30',
+      'type' => 'string_textfield',
+      'region' => 'content',
+      'settings' => [
+        'size' => '60',
+        'placeholder' => '',
+      ],
+      'third_party_settings' => [
+        'maxlength' => [
+          'maxlength_js' => '255',
+          'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+          'maxlength_js_enforce' => false,
+        ],
+        'conditional_fields' => [],
+      ],
+    ])
+    ->set('content.field_profile_year', [
+      'weight' => '31',
+      'type' => 'number',
+      'region' => 'content',
+      'settings' => [
+        'placeholder' => '',
+      ],
+      'third_party_settings' => [
+        'conditional_fields' => [],
+      ],
+    ])
+    ->save();
+  $config->getEditable('core.entity_view_display.node.ubc_profile.default')
+    ->set('dependencies.config', [
+      'field.field.node.ubc_profile.body',
+      'field.field.node.ubc_profile.field_profile_accreditation',
+      'field.field.node.ubc_profile.field_profile_address_tax',
+      'field.field.node.ubc_profile.field_profile_department_unit',
+      'field.field.node.ubc_profile.field_profile_email',
+      'field.field.node.ubc_profile.field_profile_first_name',
+      'field.field.node.ubc_profile.field_profile_image',
+      'field.field.node.ubc_profile.field_profile_job_title',
+      'field.field.node.ubc_profile.field_profile_last_name',
+      'field.field.node.ubc_profile.field_profile_meta_tags',
+      'field.field.node.ubc_profile.field_profile_office',
+      'field.field.node.ubc_profile.field_profile_phone',
+      'field.field.node.ubc_profile.field_profile_program',
+      'field.field.node.ubc_profile.field_profile_pronouns',
+      'field.field.node.ubc_profile.field_profile_rank',
+      'field.field.node.ubc_profile.field_profile_sidebar_links',
+      'field.field.node.ubc_profile.field_profile_tags',
+      'field.field.node.ubc_profile.field_profile_type',
+      'field.field.node.ubc_profile.field_profile_year',
+      'image.style.landscape_600x400_focal_point',
+      'node.type.ubc_profile',
+    ])
+    ->set('dependencies.module', [
+      'link',
+      'metatag',
+      'svg_image',
+      'telephone',
+      'text',
+      'user',
+    ])
+    ->set('content.field_profile_program', [
+      'type' => 'string',
+      'label' => 'hidden',
+      'settings' => [
+        'link_to_entity' => false,
+      ],
+      'third_party_settings' => [],
+      'region' => 'content',
+      'weight' => '17',
+    ])
+    ->set('content.field_profile_year', [
+      'type' => 'number_integer',
+      'label' => 'hidden',
+      'settings' => [
+        'thousand_separator' => '',
+        'prefix_suffix' => true,
+      ],
+      'third_party_settings' => [],
+      'region' => 'content',
+      'weight' => '18',
+    ])
+    ->save();
+  $config->getEditable('core.entity_view_display.node.ubc_profile.card_horizontal')
+    ->set('dependencies.config', [
+      'core.entity_view_mode.node.card_horizontal',
+      'field.field.node.ubc_profile.body',
+      'field.field.node.ubc_profile.field_profile_accreditation',
+      'field.field.node.ubc_profile.field_profile_address_tax',
+      'field.field.node.ubc_profile.field_profile_department_unit',
+      'field.field.node.ubc_profile.field_profile_email',
+      'field.field.node.ubc_profile.field_profile_first_name',
+      'field.field.node.ubc_profile.field_profile_image',
+      'field.field.node.ubc_profile.field_profile_job_title',
+      'field.field.node.ubc_profile.field_profile_last_name',
+      'field.field.node.ubc_profile.field_profile_meta_tags',
+      'field.field.node.ubc_profile.field_profile_office',
+      'field.field.node.ubc_profile.field_profile_phone',
+      'field.field.node.ubc_profile.field_profile_program',
+      'field.field.node.ubc_profile.field_profile_pronouns',
+      'field.field.node.ubc_profile.field_profile_rank',
+      'field.field.node.ubc_profile.field_profile_sidebar_links',
+      'field.field.node.ubc_profile.field_profile_tags',
+      'field.field.node.ubc_profile.field_profile_type',
+      'field.field.node.ubc_profile.field_profile_year',
+      'image.style.square_200',
+      'node.type.ubc_profile',
+    ])
+    ->set('dependencies.module', [
+      'svg_image',
+      'user',
+    ])
+    ->set('hidden', [
+      'body' => true,
+      'field_profile_address_tax' => true,
+      'field_profile_email' => true,
+      'field_profile_first_name' => true,
+      'field_profile_last_name' => true,
+      'field_profile_meta_tags' => true,
+      'field_profile_office' => true,
+      'field_profile_phone' => true,
+      'field_profile_program' => true,
+      'field_profile_pronouns' => true,
+      'field_profile_rank' => true,
+      'field_profile_sidebar_links' => true,
+      'field_profile_tags' => true,
+      'field_profile_type' => true,
+      'field_profile_year' => true,
+      'links' => true,
+    ])
+    ->save();
+  $config->getEditable('core.entity_view_display.node.ubc_profile.card_vertical')
+    ->set('dependencies.config', [
+      'core.entity_view_mode.node.card_vertical',
+      'field.field.node.ubc_profile.body',
+      'field.field.node.ubc_profile.field_profile_accreditation',
+      'field.field.node.ubc_profile.field_profile_address_tax',
+      'field.field.node.ubc_profile.field_profile_department_unit',
+      'field.field.node.ubc_profile.field_profile_email',
+      'field.field.node.ubc_profile.field_profile_first_name',
+      'field.field.node.ubc_profile.field_profile_image',
+      'field.field.node.ubc_profile.field_profile_job_title',
+      'field.field.node.ubc_profile.field_profile_last_name',
+      'field.field.node.ubc_profile.field_profile_meta_tags',
+      'field.field.node.ubc_profile.field_profile_office',
+      'field.field.node.ubc_profile.field_profile_phone',
+      'field.field.node.ubc_profile.field_profile_program',
+      'field.field.node.ubc_profile.field_profile_pronouns',
+      'field.field.node.ubc_profile.field_profile_rank',
+      'field.field.node.ubc_profile.field_profile_sidebar_links',
+      'field.field.node.ubc_profile.field_profile_tags',
+      'field.field.node.ubc_profile.field_profile_type',
+      'field.field.node.ubc_profile.field_profile_year',
+      'image.style.landscape_600x400_focal_point',
+      'node.type.ubc_profile',
+    ])
+    ->set('dependencies.module', [
+      'svg_image',
+      'user',
+    ])
+    ->set('content.field_profile_image', [
+      'weight' => '0',
+      'type' => 'image',
+      'region' => 'content',
+      'label' => 'hidden',
+      'third_party_settings' => [],
+      'settings' => [
+        'image_link' => '',
+        'image_style' => 'landscape_600x400_focal_point',
+        'svg_attributes' => [
+          'width' => null,
+          'height' => null,
+        ],
+        'svg_render_as_image' => true,
+        'image_loading' => [
+          'attribute' => 'lazy',
+        ],
+      ],
+    ])
+    ->set('hidden', [
+      'body' => true,
+      'field_profile_address_tax' => true,
+      'field_profile_email' => true,
+      'field_profile_first_name' => true,
+      'field_profile_last_name' => true,
+      'field_profile_meta_tags' => true,
+      'field_profile_office' => true,
+      'field_profile_phone' => true,
+      'field_profile_program' => true,
+      'field_profile_pronouns' => true,
+      'field_profile_rank' => true,
+      'field_profile_sidebar_links' => true,
+      'field_profile_tags' => true,
+      'field_profile_type' => true,
+      'field_profile_year' => true,
+      'links' => true,
+    ])
+    ->save();
+  $config->getEditable('core.entity_view_display.node.ubc_profile.teaser')
+    ->set('dependencies.config', [
+      'core.entity_view_mode.node.teaser',
+      'field.field.node.ubc_profile.body',
+      'field.field.node.ubc_profile.field_profile_accreditation',
+      'field.field.node.ubc_profile.field_profile_address_tax',
+      'field.field.node.ubc_profile.field_profile_department_unit',
+      'field.field.node.ubc_profile.field_profile_email',
+      'field.field.node.ubc_profile.field_profile_first_name',
+      'field.field.node.ubc_profile.field_profile_image',
+      'field.field.node.ubc_profile.field_profile_job_title',
+      'field.field.node.ubc_profile.field_profile_last_name',
+      'field.field.node.ubc_profile.field_profile_meta_tags',
+      'field.field.node.ubc_profile.field_profile_office',
+      'field.field.node.ubc_profile.field_profile_phone',
+      'field.field.node.ubc_profile.field_profile_program',
+      'field.field.node.ubc_profile.field_profile_pronouns',
+      'field.field.node.ubc_profile.field_profile_rank',
+      'field.field.node.ubc_profile.field_profile_sidebar_links',
+      'field.field.node.ubc_profile.field_profile_tags',
+      'field.field.node.ubc_profile.field_profile_type',
+      'field.field.node.ubc_profile.field_profile_year',
+      'node.type.ubc_profile',
+    ])
+    ->set('dependencies.module', [
+      'telephone',
+      'user',
+    ])
+    ->set('hidden', [
+      'body' => true,
+      'field_profile_accreditation' => true,
+      'field_profile_address_tax' => true,
+      'field_profile_first_name' => true,
+      'field_profile_image' => true,
+      'field_profile_last_name' => true,
+      'field_profile_meta_tags' => true,
+      'field_profile_office' => true,
+      'field_profile_program' => true,
+      'field_profile_pronouns' => true,
+      'field_profile_rank' => true,
+      'field_profile_sidebar_links' => true,
+      'field_profile_tags' => true,
+      'field_profile_type' => true,
+      'field_profile_year' => true,
+      'links' => true,
+    ])
     ->save();
 }
