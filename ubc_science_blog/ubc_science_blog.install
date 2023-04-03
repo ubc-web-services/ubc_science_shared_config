@@ -3,25 +3,27 @@
 /**
  * Implements hook_install().
  *
- * @ingroup ubc_science_blog_extend
+ * @ingroup ubc_science_blog
  */
-function ubc_science_blog_extend_install() {
+function ubc_science_blog_install() {
 }
 
 /**
  * Implements hook_uninstall().
  *
- * @ingroup ubc_science_blog_extend
+ * @ingroup ubc_science_blog
  */
 /*
-function ubc_science_blog_extend_uninstall() {
+function ubc_science_blog_uninstall() {
 }
 /*
 
 /**
- * Update profile accreditation field, view modes and form display
+ * Implements hook_update_n().
+ *
+ * @ingroup ubc_science_blog
  */
 /*
-function ubc_science_blog_extend_update_9001() {
+function ubc_science_blog_update_9001() {
 }
 */
