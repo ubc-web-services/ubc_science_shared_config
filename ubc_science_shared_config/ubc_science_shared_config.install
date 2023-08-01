@@ -9,16 +9,7 @@ function ubc_science_shared_config_install() {
   $config = \Drupal::service('config.factory');
 
   $config->getEditable('filter.format.filtered_text')
-    ->set('filters.filter_html.settings.allowed_html', '<a name href id hreflang data-* target aria-* class=""> <blockquote cite class="blockquote-* p-* px-* py-*"> <br> <caption> <cite> <code> <dd> <dl> <drupal-entity data-entity-type data-entity-uuid data-entity-embed-display data-entity-embed-display-settings data-align data-caption data-embed-button alt title class=""> <drupal-media data-entity-type data-entity-uuid alt data-align data-caption data-view-mode title class=""> <dt> <em> <h2 id> <h3 id class=""> <h4 id class=""> <h5 id class=""> <h6 id class=""> <hr> <iframe longdesc name scrolling src title align height frameborder width> <img src srcset alt title data-*> <kbd> <li> <p class="text-* mt-* uppercase text-hug text-lead text-ubc-blue-sea text-sm font-serif text-grey-700 text-uppercase"> <samp> <strike> <strong> <sub> <sup> <svg viewBox aria-* class=""> <tbody> <td colspan class="w-* w-half w-one-third w-one-quarter w-one-fifth w-one-sixth"> <tfoot> <th> <thead> <tr> <u> <use xlink:href> <span class="text-* font-* text-uppercase text-lowercase font-semibold text-grey-700 text-white"> <table class="table-* table--plain table--condensed table--striped table--hover "> <s> <div aria-* hidden class="accordion accordion--* accordion__* align-* bg-* card card--* card__* clearfix col-md-* columns--* fa fa-* first-* flex flex-* md--flex-* group hover--* js-* min-* my-* object-* p-* row second-* text-* third-* ubc-card ubc-card__* ubc-card--* unit-* widget-* widget-column-options widget-columns-2 widget--md--grid widget-region-one widget-region-two widget-columns-3 widget-region-three widget-region-four widget-color-box widget-content first-child--mt-0 widget-accordion js-reveal__parent js-reveal__trigger accordion__trigger js-reveal__target accordion__content widget-card--horizontal widget-card first-image ubc-card__media ubc-card__content_wrapper first-content ubc-card__content first-footer ubc-card__actions card--one widget-card! card--three md--flex-1 second-image second-content second-footer third-image third-content third-footer widget-card!card--two!md--flex-grid"> <button data-* data-state class="widget-* unit-* text-* widget-expandcollapse"> <ul type class="list-* list-inline list-bordered list-checked list-inline list-bordered list-checked button-list button-list list-grid--two button-list list-grid--three button-list list-grid--four"> <ol start type class="list-* list-inline list-bordered list-checked list-inline list-bordered list-checked button-list button-list list-grid--two button-list list-grid--three button-list list-grid--four">')
-    ->set('filters.editor_button_link_filter.settings.button_link_style_options', '|Default Style
-unit-button--light|Light Button
-unit-button--dark|Dark Button
-unit-button--simple|Simple Button
-unit-button--bordered|Bordered Button
-unit-button--subunit|Subunit Button
-unit-button--transparent|Transparent Button
-unit-button--capped|List Button')
-    ->save();
+    ->set('filters.filter_html.settings.allowed_html', '<a name href id hreflang data-* target aria-* class> <blockquote cite class="blockquote-* p-* px-* py-*"> <br> <caption> <cite> <code> <dd> <dl> <drupal-entity data-entity-type data-entity-uuid data-entity-embed-display data-entity-embed-display-settings data-align data-caption data-embed-button alt title class=""> <drupal-media data-entity-type data-entity-uuid alt data-align data-caption data-view-mode title class=""> <dt> <em> <h2 id> <h3 id class=""> <h4 id class=""> <h5 id class=""> <h6 id class=""> <hr> <iframe longdesc name scrolling src title align height frameborder width> <img src srcset alt title data-*> <kbd> <li> <p class="text-* mt-* uppercase text-hug text-lead text-ubc-blue-sea text-sm font-serif text-grey-700 text-uppercase"> <samp> <strike> <strong> <sub> <sup> <svg viewBox aria-* class=""> <tbody> <td colspan class="w-* w-half w-one-third w-one-quarter w-one-fifth w-one-sixth"> <tfoot> <th> <thead> <tr> <u> <use xlink:href> <span class="text-* font-* text-uppercase text-lowercase font-semibold text-grey-700 text-white"> <table class="table-* table--plain table--condensed table--striped table--hover "> <s> <div aria-* hidden class="accordion accordion--* accordion__* align-* bg-* card card--* card__* clearfix col-md-* columns--* fa fa-* first-* flex flex-* md--flex-* group hover--* js-* min-* my-* object-* p-* row second-* text-* third-* ubc-card ubc-card__* ubc-card--* unit-* widget-* widget-column-options widget-columns-2 widget--md--grid widget-region-one widget-region-two widget-columns-3 widget-region-three widget-region-four widget-color-box widget-content first-child--mt-0 widget-accordion js-reveal__parent js-reveal__trigger accordion__trigger js-reveal__target accordion__content widget-card--horizontal widget-card first-image ubc-card__media ubc-card__content_wrapper first-content ubc-card__content first-footer ubc-card__actions card--one widget-card! card--three md--flex-1 second-image second-content second-footer third-image third-content third-footer widget-card!card--two!md--flex-grid"> <button data-* data-state class="widget-* unit-* text-* widget-expandcollapse"> <ul type class="list-* list-inline list-bordered list-checked list-inline list-bordered list-checked button-list button-list list-grid--two button-list list-grid--three button-list list-grid--four"> <ol start type class="list-* list-inline list-bordered list-checked list-inline list-bordered list-checked button-list button-list list-grid--two button-list list-grid--three button-list list-grid--four">')
   $config->getEditable('editor.editor.filtered_text')
     ->set('settings.plugins.stylescombo.styles', 'p.text-hug|Text Hug (remove top spacing)
 p.text-lead.text-ubc-blue-sea|Lead Text
@@ -44,15 +35,21 @@ ol.button-list|Ordered List: buttons
 ol.button-list.list-grid--two|Ordered List: 2 across
 ol.button-list.list-grid--three|Ordered List: 3 across
 ol.button-list.list-grid--four|Ordered List: 4 across
-table.table--plain|Table: plain
-table.table--condensed|Table: condensed
-table.table--striped|Table: striped
-table.table--hover|Table: stripe on hover
-td.w-half|Column width: 1/2
-td.w-one-third|Column width: 1/3
-td.w-one-quarter|Column width: 1/4
-td.w-one-fifth|Column width: 1/5
-td.w-one-sixth|Column width: 1/6')
+a.unit-button|Unit Button
+a.unit-button.unit-button--light|Light Button
+a.unit-button.unit-button--dark|Dark Button
+a.unit-button.unit-button--simple|Simple Button
+a.unit-button.unit-button--bordered|Bordered Button
+a.unit-button.unit-button--subunit|Subunit Button
+a.unit-button.unit-button--transparent|Transparent Button
+a.unit-button.unit-button--capped|List Button
+a.unit-button.unit-button--block|Full-width Button
+a.unit-button.text-xs.unit-button--text-xs|Extra Small Button
+a.unit-button.text-sm.unit-button--text-sm|Small Button
+a.unit-button.text-lg.unit-button--text-lg|Large Button
+a.unit-button.text-xl.unit-button--text-xl|XLarge Button
+a.unit-button.text-2xl.unit-button--text-2xl|XXLarge Button
+')
     ->save();
   $config->getEditable('core.entity_form_display.media.image.default')
     ->clear(
@@ -239,16 +236,7 @@ function ubc_science_shared_config_update_9001() {
 
   $config->getEditable('filter.format.filtered_text')
     ->set('filters.filter_html.settings.allowed_html', '<a name href id hreflang data-* target aria-* class=""> <blockquote cite class="blockquote-* p-* px-* py-*"> <br> <caption> <cite> <code> <dd> <dl> <drupal-entity data-entity-type data-entity-uuid data-entity-embed-display data-entity-embed-display-settings data-align data-caption data-embed-button alt title class=""> <drupal-media data-entity-type data-entity-uuid alt data-align data-caption data-view-mode title class=""> <dt> <em> <h2 id> <h3 id class=""> <h4 id class=""> <h5 id class=""> <h6 id class=""> <hr> <iframe longdesc name scrolling src title align height frameborder width> <img src srcset alt title data-*> <kbd> <li> <p class="text-* mt-* uppercase text-hug text-lead text-ubc-blue-sea text-sm font-serif text-grey-700 text-uppercase"> <samp> <strike> <strong> <sub> <sup> <svg viewBox aria-* class=""> <tbody> <td colspan class="w-* w-half w-one-third w-one-quarter w-one-fifth w-one-sixth"> <tfoot> <th> <thead> <tr> <u> <use xlink:href> <span class="text-* font-* text-uppercase text-lowercase font-semibold text-grey-700 text-white"> <table class="table-* table--plain table--condensed table--striped table--hover "> <s> <div aria-* hidden class="accordion accordion--* accordion__* align-* bg-* card card--* card__* clearfix col-md-* columns--* fa fa-* first-* flex flex-* md--flex-* group hover--* js-* min-* my-* object-* p-* row second-* text-* third-* ubc-card ubc-card__* ubc-card--* unit-* widget-* widget-column-options widget-columns-2 widget--md--grid widget-region-one widget-region-two widget-columns-3 widget-region-three widget-region-four widget-color-box widget-content first-child--mt-0 widget-accordion js-reveal__parent js-reveal__trigger accordion__trigger js-reveal__target accordion__content widget-card--horizontal widget-card first-image ubc-card__media ubc-card__content_wrapper first-content ubc-card__content first-footer ubc-card__actions card--one widget-card! card--three md--flex-1 second-image second-content second-footer third-image third-content third-footer widget-card!card--two!md--flex-grid"> <button data-* data-state class="widget-* unit-* text-* widget-expandcollapse"> <ul type class="list-* list-inline list-bordered list-checked list-inline list-bordered list-checked button-list button-list list-grid--two button-list list-grid--three button-list list-grid--four"> <ol start type class="list-* list-inline list-bordered list-checked list-inline list-bordered list-checked button-list button-list list-grid--two button-list list-grid--three button-list list-grid--four">')
-    ->set('filters.editor_button_link_filter.settings.button_link_style_options', '|Default Style
-unit-button--light|Light Button
-unit-button--dark|Dark Button
-unit-button--simple|Simple Button
-unit-button--bordered|Bordered Button
-unit-button--subunit|Subunit Button
-unit-button--transparent|Transparent Button
-unit-button--capped|List Button')
-    ->save();
-  $config->getEditable('editor.editor.filtered_text')
+    $config->getEditable('editor.editor.filtered_text')
     ->set('settings.plugins.stylescombo.styles', 'p.text-hug|Text Hug (remove top spacing)
 p.text-lead.text-ubc-blue-sea|Lead Text
 p.text-sm|Text: small
@@ -273,15 +261,21 @@ ol.button-list|Ordered List: buttons
 ol.button-list.list-grid--two|Ordered List: 2 across
 ol.button-list.list-grid--three|Ordered List: 3 across
 ol.button-list.list-grid--four|Ordered List: 4 across
-table.table--plain|Table: plain
-table.table--condensed|Table: condensed
-table.table--striped|Table: striped
-table.table--hover|Table: stripe on hover
-td.w-half|Column width: 1/2
-td.w-one-third|Column width: 1/3
-td.w-one-quarter|Column width: 1/4
-td.w-one-fifth|Column width: 1/5
-td.w-one-sixth|Column width: 1/6')
+a.unit-button|Unit Button
+a.unit-button.unit-button--light|Light Button
+a.unit-button.unit-button--dark|Dark Button
+a.unit-button.unit-button--simple|Simple Button
+a.unit-button.unit-button--bordered|Bordered Button
+a.unit-button.unit-button--subunit|Subunit Button
+a.unit-button.unit-button--transparent|Transparent Button
+a.unit-button.unit-button--capped|List Button
+a.unit-button.unit-button--block|Full-width Button
+a.unit-button.text-xs.unit-button--text-xs|Extra Small Button
+a.unit-button.text-sm.unit-button--text-sm|Small Button
+a.unit-button.text-lg.unit-button--text-lg|Large Button
+a.unit-button.text-xl.unit-button--text-xl|XLarge Button
+a.unit-button.text-2xl.unit-button--text-2xl|XXLarge Button
+')
     ->save();
 }
 
