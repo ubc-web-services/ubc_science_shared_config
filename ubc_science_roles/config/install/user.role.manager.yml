@@ -42,7 +42,6 @@ dependencies:
     - path
     - pathauto
     - redirect
-    - role_delegation
     - scheduler
     - system
     - taxonomy
@@ -81,8 +80,6 @@ permissions:
   - 'administer themes'
   - 'administer url aliases'
   - 'administer users'
-  - 'assign content_creator role'
-  - 'assign editor role'
   - 'create file media'
   - 'create image media'
   - 'create private_file media'
