@@ -1,0 +1,32 @@
+create guide content:
+  title: 'Guide: Create new content'
+  description: ''
+  restrict access: TRUE
+delete any guide content:
+  title: 'Guide: Delete any content'
+  description: ''
+  restrict access: TRUE
+delete own guide content:
+  title: 'Guide: Delete own content'
+  description: 'Note that anonymous users with this permission are able to delete any content created by any anonymous user.'
+  restrict access: TRUE
+delete guide revisions:
+  title: 'Guide: Delete revisions'
+  description: 'To delete a revision, you also need permission to delete the content item.'
+  restrict access: TRUE
+edit any guide content:
+  title: 'Guide: Edit any content'
+  description: ''
+  restrict access: TRUE
+edit own guide content:
+  title: 'Guide: Edit own content'
+  description: 'Note that anonymous users with this permission are able to edit any content created by any anonymous user.'
+  restrict access: TRUE
+revert guide revisions:
+  title: 'Guide: Revert revisions'
+  description: 'To revert a revision, you also need permission to edit the content item.'
+  restrict access: TRUE
+view guide revisions:
+  title: 'Guide: View revisions'
+  description: 'To view a revision, you also need permission to view the content item.'
+  restrict access: TRUE
