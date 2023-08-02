@@ -245,7 +245,7 @@ function ubc_science_event_extend_uninstall() {
  /**
  * Update 9001 - update event form, view mode and image field
  */
-function ubc_science_event_extend_update_9001() {
+/* function ubc_science_event_extend_update_9001() {
   $config = \Drupal::service('config.factory');
   // set up the new fields on the form display
   $config->getEditable('core.entity_form_display.node.ubc_event.default')
@@ -372,9 +372,9 @@ function ubc_science_event_extend_update_9001() {
       ],
     ])
     ->save();
-}
+} */
 
-function ubc_science_event_extend_update_9002() {
+/* function ubc_science_event_extend_update_9002() {
   $config = \Drupal::service('config.factory');
   $config->getEditable('core.entity_form_display.node.ubc_event.default')
     ->set('dependencies.config', [
@@ -460,3 +460,4 @@ function ubc_science_event_extend_update_9002() {
     ])
     ->save();
 }
+ */

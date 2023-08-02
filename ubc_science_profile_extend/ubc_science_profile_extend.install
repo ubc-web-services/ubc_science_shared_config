@@ -433,7 +433,7 @@ function ubc_science_profile_extend_uninstall() {
 /**
  * Update profile accreditation field, view modes and form display
  */
-
+/*
 function ubc_science_profile_extend_update_9001() {
   $config = \Drupal::service('config.factory');
 
@@ -688,8 +688,8 @@ function ubc_science_profile_extend_update_9002() {
     ->set('settings.file_extensions', 'png jpg jpeg')
     ->save();
 }
-
-function ubc_science_profile_extend_update_9003() {
+ */
+/* function ubc_science_profile_extend_update_9003() {
   $config = \Drupal::service('config.factory');
   $config->getEditable('core.entity_form_display.node.ubc_profile.default')
     ->set('dependencies.config', [
@@ -998,4 +998,4 @@ function ubc_science_profile_extend_update_9003() {
       'links' => true,
     ])
     ->save();
-}
+} */

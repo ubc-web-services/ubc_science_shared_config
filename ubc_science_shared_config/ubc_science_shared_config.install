@@ -230,7 +230,7 @@ function ubc_science_shared_config_uninstall() {
 /**
  * Update to update text formats
  */
-function ubc_science_shared_config_update_9001() {
+/* function ubc_science_shared_config_update_9001() {
   // create the new configuration (will also be enabled upon install)
   // now write to the new configuration
   $config = \Drupal::service('config.factory');
@@ -279,12 +279,12 @@ a.unit-button.text-xl.unit-button--text-xl|XLarge Button
 a.unit-button.text-2xl.unit-button--text-2xl|XXLarge Button
 ')
     ->save();
-}
+} */
 
 /**
  * Update to media entities, views bulk upload title, conditional title view
  */
-function ubc_science_shared_config_update_9002() {
+/* function ubc_science_shared_config_update_9002() {
   // create the new configuration (will also be enabled upon install)
   // now write to the new configuration
   $config = \Drupal::service('config.factory');
@@ -439,11 +439,11 @@ function ubc_science_shared_config_update_9002() {
     ->set('label', 'Bulk Upload Files')
     ->save();
 }
-
+ */
 /**
  * Update paragraph entities
  */
-function ubc_science_shared_config_update_9003() {
+/* function ubc_science_shared_config_update_9003() {
   // create the new configuration (will also be enabled upon install)
   // now write to the new configuration
   $config = \Drupal::service('config.factory');
@@ -463,3 +463,4 @@ function ubc_science_shared_config_update_9003() {
     ->set('settings.file_extensions', 'png jpg jpeg')
     ->save();
 }
+ */
