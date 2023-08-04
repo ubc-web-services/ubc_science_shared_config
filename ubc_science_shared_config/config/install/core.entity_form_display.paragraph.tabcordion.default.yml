@@ -1,0 +1,54 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.tabcordion.field_paragraph_group_title
+    - field.field.paragraph.tabcordion.field_paragraph_tab
+    - field.field.paragraph.tabcordion.field_region_vertical_spacing
+    - field.field.paragraph.tabcordion.field_region_width
+    - paragraphs.paragraphs_type.tabcordion
+  module:
+    - paragraphs
+  enforced:
+    module:
+      - ubc_paragraph_entities
+id: paragraph.tabcordion.default
+targetEntityType: paragraph
+bundle: tabcordion
+mode: default
+content:
+  field_paragraph_group_title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_paragraph_tab:
+    type: entity_reference_paragraphs
+    weight: 3
+    region: content
+    settings:
+      title: Tab
+      title_plural: Tabs
+      edit_mode: closed
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: tab
+    third_party_settings: {  }
+  field_region_vertical_spacing:
+    type: options_select
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_region_width:
+    type: options_select
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true
