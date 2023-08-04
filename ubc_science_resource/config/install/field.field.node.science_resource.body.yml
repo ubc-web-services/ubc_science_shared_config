@@ -11,7 +11,8 @@ dependencies:
     - text_summary_options
 third_party_settings:
   allowed_formats:
-    allowed_formats: {  }
+    allowed_formats:
+      - simple
   text_summary_options:
     show_summary: false
     summary_help: ''
