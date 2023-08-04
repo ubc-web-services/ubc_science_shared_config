@@ -1,0 +1,29 @@
+<?php
+
+/**
+ * Implements hook_install().
+ *
+ * @ingroup ubc_science_resource
+ */
+function ubc_science_resource_install() {
+}
+
+/**
+ * Implements hook_uninstall().
+ *
+ * @ingroup ubc_science_resource
+ */
+/*
+function ubc_science_resource_extend_uninstall() {
+}
+/*
+
+/**
+ * Implements hook_update_n().
+ *
+ * @ingroup ubc_science_resource
+ */
+/*
+function ubc_science_resource_update_9001() {
+}
+*/

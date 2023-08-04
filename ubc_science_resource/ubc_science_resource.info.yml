@@ -1,0 +1,11 @@
+name: UBC Science Resource Content Type
+type: module
+description: This module provides the custom UBC Guide content type, its fields and a view.
+package: UBC Web Services
+dependencies:
+  - drupal:better_exposed_filters
+  - drupal:simple_sitemap
+  - drupal:taxonomy
+  - drupal:views
+  - ubc_science_shared_config:ubc_science_shared_config
+core_version_requirement: ^9 || ^10
