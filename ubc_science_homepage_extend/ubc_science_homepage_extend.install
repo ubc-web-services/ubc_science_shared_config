@@ -222,15 +222,3 @@ function ubc_science_homepage_extend_install() {
 function ubc_science_homepage_extend_uninstall() {
 }
 */
-
- /**
- * Update 9001 - update feature image extentions
- */
-/* function ubc_science_homepage_extend_update_9001() {
-  $config = \Drupal::service('config.factory');
-  $config->getEditable('field.field.node.homepage.field_home_feature_image')
-    ->set('settings.file_extensions', 'png jpg jpeg')
-    ->save();
-}
-
- */

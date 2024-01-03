@@ -184,9 +184,3 @@ function ubc_science_taxonomy_terms_install() {
 
 }
  */
-
-
-/*
-function ubc_science_taxonomy_terms_update_9001() {
-}
-*/

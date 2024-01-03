@@ -17,13 +17,3 @@ function ubc_science_resource_install() {
 function ubc_science_resource_extend_uninstall() {
 }
 /*
-
-/**
- * Implements hook_update_n().
- *
- * @ingroup ubc_science_resource
- */
-/*
-function ubc_science_resource_update_9001() {
-}
-*/
