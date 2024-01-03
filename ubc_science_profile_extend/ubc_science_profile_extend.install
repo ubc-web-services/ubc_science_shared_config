@@ -428,4 +428,4 @@ function ubc_science_profile_extend_install() {
 /*
 function ubc_science_profile_extend_uninstall() {
 }
-/*
+*/
