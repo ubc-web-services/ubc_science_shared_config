@@ -16,4 +16,4 @@ function ubc_science_resource_install() {
 /*
 function ubc_science_resource_extend_uninstall() {
 }
-/*
+*/
