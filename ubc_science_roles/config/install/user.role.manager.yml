@@ -46,7 +46,6 @@ dependencies:
     - system
     - taxonomy
     - toolbar
-    - tour
     - ubc_content_items
     - view_unpublished
     - webform
@@ -64,7 +63,6 @@ permissions:
   - 'access site in maintenance mode'
   - 'access taxonomy overview'
   - 'access toolbar'
-  - 'access tour'
   - 'access user profiles'
   - 'add content item entities'
   - 'administer blocks'
