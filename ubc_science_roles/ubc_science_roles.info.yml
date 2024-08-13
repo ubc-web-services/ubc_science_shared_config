@@ -1,12 +1,5 @@
-name: UBC Science Roles
+name: UBC Science Roles (deprecated)
 type: module
-description: This module manages user roles for Science suite of sites.
+description: This module has been deprecated and replaced by <a href="https://www.drupal.org/project/distributions_recipes">Drupal Recipes</a>. It can be safely uninstalled and will be removed in the next version.
 package: UBC Web Services
-dependencies:
-  - ubc_science_announcement_extend:ubc_science_announcement_extend
-  - ubc_science_event_extend:ubc_science_event_extend
-  - ubc_science_homepage_extend:ubc_science_homepage_extend
-  - ubc_science_landing_page_extend:ubc_science_landing_page_extend
-  - ubc_science_profile_extend:ubc_science_profile_extend
-  - ubc_science_shared_config:ubc_science_shared_config
-core_version_requirement: ^10
+core_version_requirement: ^10.3

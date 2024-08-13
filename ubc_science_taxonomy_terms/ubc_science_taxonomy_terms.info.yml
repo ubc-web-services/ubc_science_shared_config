@@ -1,7 +1,5 @@
-name: UBC Science Taxonomy Terms
+name: UBC Science Taxonomy Terms (deprecated)
 type: module
-description: This module creates taxonomy terms used for default settings, as they are not captured via configuration management.
+description: This module has been deprecated and replaced by <a href="https://www.drupal.org/project/distributions_recipes">Drupal Recipes</a>. It can be safely uninstalled and will be removed in the next version.
 package: UBC Web Services
-dependencies:
-  - ubc_science_shared_config:ubc_science_shared_config
-core_version_requirement: ^10
+core_version_requirement: ^10.3
