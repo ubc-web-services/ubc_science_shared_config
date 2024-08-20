@@ -1,7 +1,0 @@
-langcode: en
-status: true
-dependencies: {  }
-name: 'Documentation Type'
-vid: documentation_type
-description: ''
-weight: 0
