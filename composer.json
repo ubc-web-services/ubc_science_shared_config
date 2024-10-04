@@ -1,6 +1,6 @@
 {
   "name": "ubc-web-services/ubc_science_shared_config",
-  "description": "Custom UBC Drupal 10 config modules for the Science suite of websites",
+  "description": "Custom UBC Drupal config modules for the Science suite of websites",
   "type": "drupal-module",
   "require": {
   }
