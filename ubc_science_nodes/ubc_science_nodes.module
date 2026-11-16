@@ -10,7 +10,7 @@ use \Drupal\Core\Form\FormStateInterface;
 /**
  * Implements hook_form_BASE_FORM_ID_alter().
  */
-function ubc_science_nodes_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+function ubc_science_nodes_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id): void {
 
   // Find the content type of the node we are editing.
   $node = $form_state->getFormObject()->getEntity();
@@ -28,7 +28,7 @@ function ubc_science_nodes_form_node_form_alter(&$form, FormStateInterface $form
     ];
 
     $form['masthead_details']['compleximages'] = [
-      '#type' => 'fieldgroup',
+      '#type' => 'fieldset',
       '#title' => t("Complex Masthead Styles<br><small>* Note that if an image is added, it will replace the lower colour selected</small>"),
       '#suffix' => t('<ul style="list-style: none; padding-left: 0; display:flex; gap:1rem;" class="claro-details__description">
         <li>
@@ -65,7 +65,7 @@ function ubc_science_nodes_form_node_form_alter(&$form, FormStateInterface $form
     ];
 
     $form['masthead_details']['simpleimages'] = [
-      '#type' => 'fieldgroup',
+      '#type' => 'fieldset',
       '#title' => t("Simple Masthead Style"),
       '#suffix' => t('<ul style="list-style: none; padding-left: 0; display:flex; gap:1rem;" class="claro-details__description">
         <li>
